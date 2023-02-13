@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/lcompieg/Desktop/BSQ'
+make: Leaving directory `/Users/lcompieg/Desktop/BSQ'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
