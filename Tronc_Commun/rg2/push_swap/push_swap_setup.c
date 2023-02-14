@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:46:23 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/03 18:47:43 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:14:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static t_stack	*fill_stack_str(t_stack *stack, const char *argv)
 		ft_add_backstack(&stack, ft_newstack(ft_atoi_stack(str[i], stack)));
 		i++;
 	}
-	handle_error(i, stack);
 	free_split(str, i);
+	handle_error(i, stack);
 	return (stack);
 }
 

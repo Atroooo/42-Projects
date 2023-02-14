@@ -15,15 +15,15 @@ HEADER 		= push_swap.h
 
 RM 			= rm -f
 
-all:    	${NAME}
+all:    	ft_printf ${NAME}
 
 %.o: 		%.c ${HEADER}  
 			${CC} ${FLAGS} -include${HEADER} -c $< -o $@
 
-$(NAME):    ft_printf $(OBJS) 
+$(NAME):    $(OBJS) 
 			${CC} ${FLAGS} -include${HEADER} $(OBJS) ft_printf/libftprintf.a -o push_swap
 
-sanitize:	ft_printf $(OBJS) 
+sanitize:	$(OBJS) 
 			${CC} ${FLAGS} -g -fsanitize=address -include${HEADER} $(OBJS) ft_printf/libftprintf.a -o push_swap
 
 clean:

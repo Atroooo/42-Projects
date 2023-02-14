@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 12:57:09 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/12 18:49:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:58:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ int	key_hook(int keycode, t_env *env)
 void	mlx_setup(t_env *env)
 {
 	env->mlx = mlx_init();
+	if (!env->mlx)
+	{
+		clear_struct(env);
+		exit(0);
+	}
 	env->mlx_win = mlx_new_window(env->mlx, RES_X, RES_Y, "FdF");
 	env->img = mlx_new_image(env->mlx, RES_X, RES_Y);
 	if (!env->img)

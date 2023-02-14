@@ -27,11 +27,11 @@ void	update_wdw(t_env *env)
 		mlx_destroy_image(env->mlx, env->img);
 	env->img = mlx_new_image(env->mlx, RES_X, RES_Y);
 	if (!env->img)
-		clear_struct(env);
+		mlx_close(env);
 	env->addr = mlx_get_data_addr(env->img, &env->bits_per_pixel, \
 		&env->line_length, &env->endian);
 	if (!env->addr)
-		clear_struct(env);
+		mlx_close(env);
 	project(env);
 	mlx_clear_window(env->mlx, env->mlx_win);
 	mlx_put_image_to_window(env->mlx, env->mlx_win, env->img, \
