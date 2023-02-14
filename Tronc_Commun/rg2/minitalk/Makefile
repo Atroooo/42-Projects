@@ -25,10 +25,12 @@ $(BUILD_DIR)%.o: 		${SRCS_DIR}%.c ${HEADER}
 						@mkdir -p $(BUILD_DIR)
 						${CC} ${FLAGS} -include${HEADER} -c $< -o $@
 
-$(NAME_SERVER):    		libft $(OBJS_SERVER) ${HEADER}
+$(NAME_SERVER):    		$(OBJS_SERVER) ${HEADER}
+						make -C libft
 						${CC} ${FLAGS} -include${HEADER} $(OBJS_SERVER) libft/libft.a -o server
 
-$(NAME_CLIENT):    		libft $(OBJS_CLIENT) ${HEADER}
+$(NAME_CLIENT):    		$(OBJS_CLIENT) ${HEADER}
+						make -C libft
 						${CC} ${FLAGS} -include${HEADER} $(OBJS_CLIENT) libft/libft.a -o client
 
 clean:

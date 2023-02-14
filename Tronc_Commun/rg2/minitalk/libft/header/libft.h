@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ../header/libft.h                                            :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:14:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2022/12/06 16:42:13 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:23:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
 
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
@@ -81,6 +80,5 @@ int				ft_printf_char(char c, int nb);
 int				ft_printf_nbr(char c, int nb);
 int				ft_printf_addr(char c, unsigned long nb);
 int				get_nbsize_hexa(unsigned long nb);
-
 
 #endif

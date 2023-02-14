@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:08:20 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/08 23:36:32 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/14 19:22:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handler(unsigned char c, pid_t pid)
 	while (i >= 0)
 	{
 		if (c < base)
-			kill(pid, SIGUSR1);		
+			kill(pid, SIGUSR1);
 		else
 		{
 			kill(pid, SIGUSR2);
@@ -30,7 +30,7 @@ void	handler(unsigned char c, pid_t pid)
 		}
 		base = base / 2;
 		i--;
-		usleep(200);
+		usleep(100);
 	}
 }
 
@@ -46,8 +46,10 @@ int	main(int argc, char **argv)
 	while (argv[2][index])
 	{
 		handler(argv[2][index], server_pid);
+		handler(0, server_pid);
 		index++;
 	}
 	handler('\n', server_pid);
+	handler(0, server_pid);
 	return (0);
 }

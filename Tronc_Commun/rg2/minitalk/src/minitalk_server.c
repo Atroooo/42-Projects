@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:15:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/08 23:30:31 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/14 19:15:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 void	handler(int sig, siginfo_t *info, void *context)
 {
 	static int	i = 0;
-	static char	c = 0;
+	static char	c = 0.f;
 
 	(void)info;
 	(void)context;
 	if (sig == SIGUSR2)
 		c = c | 128 >> i;
-	if (++i == 8)
+	i++;
+	if (i == 8)
 	{
 		write(1, &c, 1);
 		c = 0;
