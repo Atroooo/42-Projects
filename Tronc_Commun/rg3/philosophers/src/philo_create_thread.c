@@ -1,44 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_create_thread.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/14 20:44:33 by marvin           ###   ########.fr       */
+/*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/02/14 20:35:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-void	display_env(t_env *env)
+static void	*routine(void *arg)
+{
+	(void) arg;
+	return (NULL);
+}
+
+void	create_philo(t_env *env)
 {
 	int	index;
 
 	index = 0;
+	env->philo = malloc(sizeof(t_philo *) * env->nb_philo);
 	while (index < env->nb_philo)
 	{
-		printf("%d\n", env->philo[index]->pos);
+		env->philo[index] = malloc(sizeof(t_philo));
+        env->philo[index]->pos = index + 1;
+		if (pthread_create(&env->philo[index]->thread, NULL, &routine, &index) != 0)
+			return ;
+		if (pthread_join(env->philo[index]->thread, NULL) != 0)
+			return ;	
+		pthread_mutex_init(&env->philo[index]->mutex, NULL);
 		index++;
 	}
-}
-
-int	main(int argc, char **argv)
-{
-	t_env	*env;
-	
-	if (argc == 5 || argc == 6)
-	{
-		env = malloc(sizeof(t_env));
-		if (!parsing(env, argv, argc))
-			return (-1);
-		display_env(env);
-	}
-	else
-	{
-		printf("Error");
-		return (-1);
-	}
-	return (0);
 }
