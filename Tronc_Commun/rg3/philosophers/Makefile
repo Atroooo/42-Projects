@@ -8,7 +8,7 @@ SRCS_DIR	= 			src/
 BUILD_DIR	= 			${SRCS_DIR}build/
 
 SRCS 		= 			philo.c philo_atoi.c philo_parsing.c \
-						philo_create_thread.c
+						philo_create_thread.c philo_clear.c
 				 
 HEADER		=			${HEADER_DIR}philo.h
 

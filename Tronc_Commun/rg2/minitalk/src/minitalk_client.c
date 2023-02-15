@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_client.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:08:20 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/14 19:22:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/15 13:01:56 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	handler(unsigned char c, pid_t pid)
 		}
 		base = base / 2;
 		i--;
-		usleep(100);
+		usleep(1000);
 	}
 }
 

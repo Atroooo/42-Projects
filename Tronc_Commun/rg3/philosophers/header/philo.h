@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/14 20:44:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/15 14:25:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@
 typedef	struct s_philo
 {
 	int				pos;
-	pthread_t		thread;
-	pthread_mutex_t	mutex;
+	int				dead;
+	pthread_t		th;
+	pthread_mutex_t	fork;
 } t_philo;
 
 

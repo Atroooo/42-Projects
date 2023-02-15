@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_create_thread.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/14 20:35:12 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/15 14:24:15 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ static void	*routine(void *arg)
 	return (NULL);
 }
 
+static void	init_var(t_philo *philo, int index)
+{
+	philo->dead = 0;
+    philo->pos = index + 1;
+}
+
 void	create_philo(t_env *env)
 {
 	int	index;
@@ -27,12 +33,10 @@ void	create_philo(t_env *env)
 	while (index < env->nb_philo)
 	{
 		env->philo[index] = malloc(sizeof(t_philo));
-        env->philo[index]->pos = index + 1;
-		if (pthread_create(&env->philo[index]->thread, NULL, &routine, &index) != 0)
+		init_var(env->philo[index], index);
+		if (pthread_create(&env->philo[index]->th, NULL, &routine, &index) != 0)
 			return ;
-		if (pthread_join(env->philo[index]->thread, NULL) != 0)
-			return ;	
-		pthread_mutex_init(&env->philo[index]->mutex, NULL);
+		pthread_mutex_init(&env->philo[index]->fork, NULL);
 		index++;
 	}
 }

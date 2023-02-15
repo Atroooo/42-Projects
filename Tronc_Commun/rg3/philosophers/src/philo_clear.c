@@ -11,3 +11,23 @@
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+
+void	free_env(t_env *env)
+{
+	int	index;
+
+	index = 0;
+	while (index < env->nb_philo)
+	{
+		if (env->philo[index]->th)
+			pthread_detach(env->philo[index]->th);
+		if (pthread_mutex_destroy(&env->philo[index]->fork))
+			pthread_mutex_destroy(&env->philo[index]->fork);
+		if (env->philo[index])
+		free(env->philo[index]);
+	}
+	if (env->philo)
+		free(env->philo);
+	if (env)
+		free(env);
+}

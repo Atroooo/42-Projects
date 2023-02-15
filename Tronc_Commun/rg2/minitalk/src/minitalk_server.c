@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_server.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:15:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/14 19:15:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/15 13:02:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
 
-void	handler(int sig, siginfo_t *info, void *context)
+void	handler(int sig)
 {
 	static int	i = 0;
-	static char	c = 0.f;
-
-	(void)info;
-	(void)context;
+	static char	c = 0;
+	
 	if (sig == SIGUSR2)
 		c = c | 128 >> i;
 	i++;
@@ -43,8 +41,10 @@ int	main(int argc, char **argv)
 	}
 	pid = getpid();
 	ft_printf("Server PID is %d\n", pid);
-	sa.sa_flags = SA_SIGINFO;
-	sa.sa_sigaction = handler;
+	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SI_USER);
+	sa.sa_flags = SI_USER;
+	sa.sa_handler = handler;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
