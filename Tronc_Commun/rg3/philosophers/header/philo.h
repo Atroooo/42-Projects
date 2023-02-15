@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/15 14:25:29 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:06:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ typedef	struct s_philo
 {
 	int				pos;
 	int				dead;
+	int				nb_eat;
+	int				last_eat;
 	pthread_t		th;
-	pthread_mutex_t	fork;
+	pthread_mutex_t	fork_l;
+	pthread_mutex_t	fork_r;
 } t_philo;
 
 
@@ -38,6 +41,7 @@ typedef struct s_env
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		nb_eat;
+	pthread_mutex_t	m_eat;
 } t_env;
 
 //Parsing functions
@@ -46,6 +50,7 @@ int		parsing(t_env *env, char **argv, int argc);
 
 //Thread functions
 void	create_philo(t_env *env);
+void	*routine(void *philo);
 
 //Free functions
 
