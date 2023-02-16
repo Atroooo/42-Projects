@@ -14,22 +14,22 @@
 
 void	free_str(char **str)
 {
-	int	i;
+	int	index;
 
-	i = 0;
-	while (str[i])
+	index = 0;
+	while (str[index])
 	{
-		free(str[i]);
-		i++;
+		free(str[index]);
+		index++;
 	}
 	free(str);
 }
 
-static char	*get_env(char *name, char **env)
+static char	*get_env(char **env)
 {
 	int		i;
 	int		j;
-	char	*sub;
+	char	*substr;
 
 	i = 0;
 	while (env[i])
@@ -37,13 +37,13 @@ static char	*get_env(char *name, char **env)
 		j = 0;
 		while (env[i][j] && env[i][j] != '=')
 			j++;
-		sub = ft_substr(env[i], 0, j);
-		if (ft_strncmp(sub, name, ft_strlen(sub)) == 0)
+		substr = ft_substr(env[i], 0, j);
+		if (ft_strncmp(substr, "PATH", ft_strlen(substr)) == 0)
 		{
-			free(sub);
+			free(substr);
 			return (env[i] + j + 1);
 		}
-		free(sub);
+		free(substr);
 		i++;
 	}
 	return (NULL);
@@ -51,29 +51,29 @@ static char	*get_env(char *name, char **env)
 
 char	*get_path(char *cmd, char **env)
 {
-	int		i;
+	int		index;
 	char	*exec;
-	char	**allpath;
+	char	**all_path;
 	char	*path_part;
-	char	**s_cmd;
+	char	**cmd_s;
 
-	i = 0;
-	allpath = ft_split(get_env("PATH", env), ':');
-	s_cmd = ft_split(cmd, ' ');
-	while (allpath[i])
+	index = 0;
+	all_path = ft_split(get_env(env), ':');
+	cmd_s = ft_split(cmd, ' ');
+	while (all_path[index])
 	{
-		path_part = ft_strjoin(allpath[i], "/");
-		exec = ft_strjoin(path_part, s_cmd[0]);
+		path_part = ft_strjoin(all_path[index], "/");
+		exec = ft_strjoin(path_part, cmd_s[0]);
 		free(path_part);
 		if (access(exec, F_OK | X_OK) == 0)
 		{
-			free_str(s_cmd);
+			free_str(cmd_s);
 			return (exec);
 		}
 		free(exec);
-		i++;
+		index++;
 	}
-	free_str(allpath);
-	free_str(s_cmd);
+	free_str(all_path);
+	free_str(cmd_s);
 	return (cmd);
 }
