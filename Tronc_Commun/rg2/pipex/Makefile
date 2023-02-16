@@ -8,7 +8,7 @@ SRCS_DIR	= 			src/
 GNL_DIR		=			${SRCS_DIR}get_next_line/
 BUILD_DIR	= 			${SRCS_DIR}build/
 
-SRCS 		= 			pipex.c
+SRCS 		= 			pipex.c pipex_utils.c
 
 SRCS_GNL	= 			get_next_line.c get_next_line_utils.c
 				 
