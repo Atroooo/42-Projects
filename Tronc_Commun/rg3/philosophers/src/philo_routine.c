@@ -12,16 +12,43 @@
 
 #include "../header/philo.h"
 
-void	*routine(void *philo)
+void	take_fork(t_philo *philo)
 {
-	pthread_mutex_t	mutex;
-	
-	while(!philo->dead) //ou que tous les philosophes ont mangé
+	(void) philo;
+	return ;
+}
+
+void	philo_eat(t_philo *philo)
+{
+	(void) philo;
+	return ;
+}
+
+void	philo_sleep_think(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->stop);
+	print(philo, "is sleeping");
+	ft_usleep(philo->data->time_to_sleep);
+	pthread_mutex_unlock(&philo->stop);
+	pthread_mutex_lock(&philo->stop);
+	print(philo, "is thinking");
+	pthread_mutex_unlock(&philo->stop);
+}
+
+int	is_dead(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->stop);
+	if (philo->last_eat - philo->data->time_to_die < 0)
 	{
-		//action
-		//mange : l'un des voisins ne pourra pas manger parce que celui qui mange va lui emprunter sa fourchette : mange le temps en ms
-		//dors : la fourchette du philo peut être emprunter : dors le temps en ms
-		//pense	: la fourchette du philo peut être emprunter : pense le temps en ms
+		pthread_mutex_unlock(&philo->stop);
+		return (1);
 	}
-	return (NULL);
+	if (philo->data->nb_eat > 0 && \
+		philo->m_eat == philo->data->nb_eat)
+	{
+		pthread_mutex_unlock(&philo->stop);
+		return (2);
+	}
+	pthread_mutex_unlock(&philo->stop);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:07:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/14 20:43:57 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/17 20:18:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ int	parsing(t_env *env, char **argv, int argc)
 		if (!is_digit(argv[5]))
 			return (0);
 		env->nb_eat = ft_atoi(argv[5]);
-
 	}
 	else
 		env->nb_eat = 0;
-	create_philo(env);
 	return (1);
 }
