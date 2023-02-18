@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/17 20:07:12 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/18 16:59:16 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,13 @@ void	free_env(t_env *env)
 	index = 0;
 	while (index < env->nb_philo)
 	{
-		pthread_mutex_destroy(&env->philo[index]->fork_l);
-		pthread_mutex_destroy(&env->philo[index]->fork_r);
-		pthread_mutex_destroy(&env->philo[index]->stop);
-		if (env->philo[index])
-			free(env->philo[index]);
+		pthread_mutex_destroy(&env->philo[index].stop);
+		index++;
 	}
 	if (env->philo)
 		free(env->philo);
 	if (env)
 		free(env);
-}
-
-void	display_env(t_env *env)
-{
-	int	index;
-
-	index = 0;
-	while (index < env->nb_philo)
-	{
-		printf("%d\n", env->philo[index]->pos);
-		index++;
-	}
 }
 
 int	main(int argc, char **argv)
@@ -54,8 +39,10 @@ int	main(int argc, char **argv)
 			return (-1);
 		if (!parsing(env, argv, argc))
 			return (-1);
-		create_philo(env);
+		if (!philo_life(env))
+			return (-1);
 		free_env(env);
+		return (1);
 	}
 	else
 	{

@@ -29,7 +29,17 @@ void	ft_usleep(int ms)
 		usleep(ms / 10);
 }
 
-void	print(t_philo *philo, char *str)
+void	set_dead(t_env *env, int s)
 {
-	printf("%lld %d %s", timestamp(), philo->pos, str);
+	int	index;
+
+	index = 0;
+	while (index < env->nb_philo)
+	{
+		if (s == 1)
+			env->philo[index].dead = 1;
+		else if (s == 2)
+			env->philo[index].dead = 2;
+		index++;
+	}
 }
