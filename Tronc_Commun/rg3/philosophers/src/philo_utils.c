@@ -29,7 +29,7 @@ void	ft_usleep(int ms)
 		usleep(ms / 10);
 }
 
-void	set_dead(t_env *env, int s)
+static void	set_dead(t_env *env, int s)
 {
 	int	index;
 
@@ -42,4 +42,30 @@ void	set_dead(t_env *env, int s)
 			env->philo[index].dead = 2;
 		index++;
 	}
+}
+
+int	check_dead(t_env *env)
+{
+	int	index;
+	int	count;
+
+	index = 0;
+	count = 0;
+	while (index < env->nb_philo)
+	{
+		if (env->philo[index].dead == 1)
+		{
+			set_dead(env, 1);
+			return (1);
+		}
+		if (env->philo[index].dead == 2)
+			count++;
+		index++;
+	}
+	if (count == env->nb_philo)
+	{
+		set_dead(env, 2);
+		return (1);
+	}
+	return (0);
 }

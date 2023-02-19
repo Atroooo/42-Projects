@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_create_thread.c                              :+:      :+:    :+:   */
+/*   philo_thread.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/18 17:13:25 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/19 14:23:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	*routine(void *phil)
 	{
 		if (take_fork(philo, start))
 			philo_eat(philo, start);
-		philo_sleep_think(philo, start);
+		if (philo->think == 0)
+			philo_sleep_think(philo, start);
 	}
 	if (is_dead(philo) == 1 && philo->dead == 1)
 	{
@@ -41,6 +42,7 @@ static int	init_var(t_philo *philo, int index)
 	philo->dead = 0;
 	philo->r_taken = 0;
 	philo->l_taken = 0;
+	philo->think = 1;
 	if (pthread_mutex_init(&philo->fork, NULL) != 0)
 		return (0);
 	philo->f_taken = 0;
@@ -70,31 +72,6 @@ static int	create_philo(t_env *env)
 	return (1);
 }
 
-static int	check_dead(t_env *env)
-{
-	int	index;
-	int	count;
-
-	index = 0;
-	count = 0;
-	while (index < env->nb_philo)
-	{
-		if (env->philo[index].dead == 1)
-		{
-			set_dead(env, 1);
-			return (1);
-		}
-		if (env->philo[index].dead == 2)
-			count++;
-	}
-	if (count == env->nb_philo)
-	{
-		set_dead(env, 2);
-		return (1);
-	}
-	return (0);
-}
-
 int	philo_life(t_env *env)
 {
 	int	index;
@@ -105,7 +82,7 @@ int	philo_life(t_env *env)
 	{
 		if (check_dead(env))
 			break ;
-		usleep(100);
+		usleep(50);
 	}
 	index = 0;
 	while (index < env->nb_philo)

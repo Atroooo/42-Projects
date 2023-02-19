@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/18 16:59:16 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/19 14:09:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 		if (!parsing(env, argv, argc))
 			return (-1);
 		if (!philo_life(env))
-			return (-1);
+			return (1);
 		free_env(env);
 		return (1);
 	}
