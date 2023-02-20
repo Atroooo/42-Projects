@@ -12,12 +12,36 @@
 
 #include "../header/pipex.h"
 
+static int	check_args(const char *haystack, const char *needle, size_t len)
+{
+	unsigned int	i;
+	int				j;
+
+	if (haystack == NULL && len == 0)
+		return (0);
+	i = 0;
+	if (needle[i] == '\0')
+		return (0);
+	while (haystack[i] && i < len)
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j] && haystack[i + j] != '\0'
+			&& i + j < len)
+			j++;
+		if (needle[j] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 static void	exec_cmd(char *cmd, char **env)
 {
 	char	**cmd_s;
 	char	*path;
 
 	cmd_s = ft_split(cmd, ' ');
+	printf("%s", cmd_s[1]);
 	path = get_path(cmd_s[0], env);
 	if (execve(path, cmd_s, env) == -1)
 	{
@@ -75,6 +99,9 @@ int	main(int argc, char **argv, char **env)
 		ft_putstr_fd("Error Pipe", 2);
 		exit(-1);
 	}
+	if (check_args(argv[2], "./", 2) || \
+		check_args(argv[3], "./", 2))
+		exit(-1);
 	pid = fork();
 	if (pid == -1)
 	{
