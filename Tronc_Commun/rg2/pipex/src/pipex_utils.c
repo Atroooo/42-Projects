@@ -49,7 +49,7 @@ static char	*get_env(char **env)
 	return (NULL);
 }
 
-char	*get_path(char *cmd, char **env)
+static char	*get_path(char *cmd, char **env)
 {
 	int		index;
 	char	*exec;
@@ -76,4 +76,20 @@ char	*get_path(char *cmd, char **env)
 	free_str(all_path);
 	free_str(cmd_s);
 	return (cmd);
+}
+
+void	exec_cmd(char *cmd, char **env)
+{
+	char	**cmd_s;
+	char	*path;
+
+	cmd_s = ft_split(cmd, ' ');
+	path = get_path(cmd_s[0], env);
+	if (execve(path, cmd_s, env) == -1)
+	{
+		ft_putstr_fd("Command not found: ", 2);
+		ft_putendl_fd(cmd_s[0], 2);
+		free_str(cmd_s);
+		exit(0);
+	}
 }

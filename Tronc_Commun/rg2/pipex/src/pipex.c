@@ -35,22 +35,6 @@ static int	check_args(const char *haystack, const char *needle, size_t len)
 	return (0);
 }
 
-static void	exec_cmd(char *cmd, char **env)
-{
-	char	**cmd_s;
-	char	*path;
-
-	cmd_s = ft_split(cmd, ' ');
-	path = get_path(cmd_s[0], env);
-	if (execve(path, cmd_s, env) == -1)
-	{
-		ft_putstr_fd("Command not found: ", 2);
-		ft_putendl_fd(cmd_s[0], 2);
-		free_str(cmd_s);
-		exit(0);
-	}
-}
-
 static void	parent(char **argv, char **env, int *p_fd)
 {
 	int	fd;
@@ -64,6 +48,10 @@ static void	parent(char **argv, char **env, int *p_fd)
 	dup2(fd, 1);
 	dup2(p_fd[0], 0);
 	close(p_fd[1]);
+	if (ft_strlen(argv[3]) == 0 && ft_strlen(argv[2]) == 0)
+	{
+		exit(0); //close fd
+	}
 	exec_cmd(argv[3], env);
 }
 
@@ -80,34 +68,40 @@ static void	child(char **argv, char **env, int *p_fd)
 	dup2(fd, 0);
 	dup2(p_fd[1], 1);
 	close(p_fd[0]);
+	if (ft_strlen(argv[2]) == 0 && ft_strlen(argv[3]) == 0)
+	{
+		exit(0); //close fd
+	}
 	exec_cmd(argv[2], env);
+}
+
+void	print_error(char *str)
+{
+	ft_putstr_fd(str, 2);
+	exit(0);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	int	p_fd[2];
-	int	pid;
+	pid_t	pid;
 
+	if (!env[0])
+		print_error("Environnement Error");
 	if (argc != 5)
 	{
 		ft_putstr_fd("Usage : ./pipex infile \"command\" \"command\" outfile", 2);
 		exit(0);
 	}
 	if (pipe(p_fd) == -1)
-	{
-		ft_putstr_fd("Error Pipe", 2);
-		exit(-1);
-	}
+		print_error("Error Pipe");
 	if (check_args(argv[2], "./", 2) || \
 		check_args(argv[3], "./", 2))
-		exit(-1);
+		print_error("Error Command");
 	pid = fork();
 	if (pid == -1)
-	{
-		ft_putstr_fd("Error Fork", 2);
-		exit(-1);
-	}
-	if (!pid)
+		print_error("Error Fork");
+	if (pid == 0)
 		child(argv, env, p_fd);
 	parent(argv, env, p_fd);
 }
