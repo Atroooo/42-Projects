@@ -26,7 +26,14 @@
 # include "../libft/header/libft.h"
 # include "get_next_line.h"
 
-void	exec_cmd(char *cmd, char **env);
+/*Execution functions*/
+void	parent(char **argv, char **env, int *p_fd);
+void	child(char **argv, char **env, int *p_fd);
+
+/*Parsing functions*/
+int	    args_nempty(char *str);
+
+/*Free functions*/
 void	free_str(char **tab);
 
 #endif
