@@ -12,14 +12,22 @@
 
 #include "push_swap.h"
 
-static int	return_number(long nb, int sign, t_stack *stack)
+static int	return_number(long nb, int sign, t_stack *stack, char **str)
 {
 	if ((nb * sign) > -2147483648 && (nb * sign) < 2147483647)
 		return (nb * sign);
 	if ((nb * sign) < -2147483648)
+	{
+		if (str)
+			free_split(str);
 		print_error(stack, 1);
+	}
 	if ((nb * sign) > 2147483647)
+	{
+		if (str)
+			free_split(str);
 		print_error(stack, 1);
+	}
 	return (nb * sign);
 }
 
@@ -29,7 +37,7 @@ static int	check_isspace(char c)
 		|| c == '\r' || c == '\t' || c == '\v');
 }
 
-int	ft_atoi_stack(const char *str, t_stack *stack)
+int	ft_atoi_s(const char *str, t_stack *stack, char **split)
 {
 	int			sign;
 	long int	nb;
@@ -50,7 +58,7 @@ int	ft_atoi_stack(const char *str, t_stack *stack)
 	{
 		nb = (nb * 10) + str[index] - '0';
 		if (str[index + 1] == '\0')
-			return (return_number(nb, sign, stack));
+			return (return_number(nb, sign, stack, split));
 		if (!(48 <= str[index + 1] && str[index + 1] <= 57))
 			print_error(stack, 1);
 		index++;

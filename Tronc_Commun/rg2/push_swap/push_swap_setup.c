@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_setup.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:46:23 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/14 17:14:18 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/21 13:59:45 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	handle_error(int i, t_stack *stack)
+static void	handle_error(int i, t_stack *stack, char **str)
 {
+	free_split(str);
 	if (i == 1)
 		print_error(stack, 0);
 	if (i < 2 || !check_stack(stack))
@@ -39,7 +40,7 @@ static t_stack	*fill_stack_nostr(t_stack *stack, char **argv, int argc)
 				print_error(stack, 1);
 			j++;
 		}
-		ft_add_backstack(&stack, ft_newstack(ft_atoi_stack(argv[i], stack)));
+		ft_add_backstack(&stack, ft_newstack(ft_atoi_s(argv[i], stack, NULL)));
 		i++;
 	}
 	if (!check_stack(stack))
@@ -63,14 +64,16 @@ static t_stack	*fill_stack_str(t_stack *stack, const char *argv)
 			if (((str[i][j] == '-' || str[i][j] == '+')
 				&& !ft_isdigit(str[i][j + 1])) || ((str[i][j] != '-'
 				&& str[i][j] != '+') && !ft_isdigit(str[i][j])))
+			{
+				free_split(str);
 				print_error(stack, 1);
+			}
 			j++;
 		}
-		ft_add_backstack(&stack, ft_newstack(ft_atoi_stack(str[i], stack)));
+		ft_add_backstack(&stack, ft_newstack(ft_atoi_s(str[i], stack, str)));
 		i++;
 	}
-	free_split(str, i);
-	handle_error(i, stack);
+	handle_error(i, stack, str);
 	return (stack);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:32:12 by atro              #+#    #+#             */
-/*   Updated: 2023/02/10 14:10:42 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/21 14:00:08 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_stack	*get_first_stack(t_stack *stack);
 void	ft_add_frontstack(t_stack **stack, t_stack *new);
 void	ft_add_backstack(t_stack **stack, t_stack *new);
 int		ft_sizestack(t_stack *stack);
-int		ft_atoi_stack(const char *str, t_stack *stack);
+int		ft_atoi_s(const char *str, t_stack *stack, char **split);
 t_stack	*fill_stack(t_stack *stack, char **argv, int argc);
 
 //Error management functions
@@ -47,7 +47,7 @@ void	ft_clearstack(t_stack **stack);
 void	print_error(t_stack *stack, int s);
 int		check_stack(t_stack *stack);
 int		stack_is_sort(t_stack *stack);
-void	*free_split(char **str, int index);
+void	free_split(char **str);
 
 //Sorting functions
 int		get_min_value(t_stack *stack_a);

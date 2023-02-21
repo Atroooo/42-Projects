@@ -41,7 +41,6 @@ static void	exec_cmd(char *cmd, char **env)
 	char	*path;
 
 	cmd_s = ft_split(cmd, ' ');
-	printf("%s", cmd_s[1]);
 	path = get_path(cmd_s[0], env);
 	if (execve(path, cmd_s, env) == -1)
 	{

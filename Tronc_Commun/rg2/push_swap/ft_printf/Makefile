@@ -14,12 +14,12 @@ LIB 		= ar rcs
 
 RM 			= rm -f
 
-all:    	${NAME}
+all:    	libft ${NAME}
 
 %.o: 		%.c ${HEADER}  
 			${CC} ${FLAGS} -include${HEADER} -c $< -o $@
 
-$(NAME):    libft $(OBJS) 
+$(NAME):    $(OBJS) 
 			cp libft/libft.a ./libftprintf.a
 			${LIB} ${NAME} ${OBJS}
 

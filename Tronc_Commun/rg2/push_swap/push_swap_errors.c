@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_errors.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:21:48 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/03 18:41:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/21 13:46:34 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ int	stack_is_sort(t_stack *stack)
 	return (1);
 }
 
-void	*free_split(char **str, int index)
+void	free_split(char **str)
 {
 	int	i;
 
 	i = 0;
-	while (i < index)
+	while (str[i])
 	{
-		free(str[i]);
+		if (str[i])
+			free(str[i]);
 		i++;
 	}
 	free(str);
-	return (NULL);
 }
