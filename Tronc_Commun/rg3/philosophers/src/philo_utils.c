@@ -22,11 +22,7 @@ long long	timestamp(void)
 
 void	ft_usleep(int ms)
 {
-	long int	time;
-
-	time = timestamp();
-	while (timestamp() - time < ms)
-		usleep(ms / 10);
+	usleep(ms * 1000);
 }
 
 static void	set_dead(t_env *env, int s)

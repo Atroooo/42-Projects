@@ -33,10 +33,10 @@ $(NAME):    			$(OBJS) ${HEADER}
 
 
 sanitize:				$(OBJS) ${HEADER}
-						${CC} ${FLAGS} -fsanitize=address -I${HEADER_DIR} $(OBJS) -o philo
+						${CC} ${FLAGS} -fsanitize=thread -I${HEADER_DIR} $(OBJS) -o philo
 
 clean:
-						${RM} $(BUILD_DIR)/*.o
+						${RM} $(BUILD_DIR)*.o
 
 fclean:     			clean
 						${RM} ${NAME} philo

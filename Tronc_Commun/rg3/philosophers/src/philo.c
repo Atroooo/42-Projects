@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/19 14:09:29 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:30:31 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,24 @@ void	free_env(t_env *env)
 	index = 0;
 	while (index < env->nb_philo)
 	{
-		pthread_mutex_destroy(&env->philo[index].stop);
+		pthread_mutex_destroy(&env->philo[index].fork);
 		index++;
 	}
 	if (env->philo)
 		free(env->philo);
 	if (env)
 		free(env);
+}
+
+int	one_philo(t_env *env)
+{
+	long long start;
+
+	start = timestamp();
+	ft_usleep(env->time_to_die);
+	printf("%lld 1 is dead.\n", timestamp() - start);
+	free(env);
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -39,6 +50,8 @@ int	main(int argc, char **argv)
 			return (-1);
 		if (!parsing(env, argv, argc))
 			return (-1);
+		if (env->nb_philo == 1)
+			return (one_philo(env));
 		if (!philo_life(env))
 			return (1);
 		free_env(env);

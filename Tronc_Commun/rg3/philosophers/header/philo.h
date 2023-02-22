@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/19 15:00:34 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:24:31 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ typedef struct s_philo
 	int				r_taken;
 	int				l_taken;
 	int				think;
-	pthread_mutex_t	stop;
 	struct s_env	*data;
 }	t_philo;
 
 typedef struct s_env
 {
-	t_philo		*philo;
-	int			nb_philo;
-	long long	time_to_die;
-	long long	time_to_eat;
-	long long	time_to_sleep;
-	int			nb_eat;
+	pthread_mutex_t	death;
+	t_philo			*philo;
+	int				nb_philo;
+	long long		time_to_die;
+	long long		time_to_eat;
+	long long		time_to_sleep;
+	int				nb_eat;
 }	t_env;
 
 /* Parsing functions */
