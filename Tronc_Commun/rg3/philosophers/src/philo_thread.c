@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_thread.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/22 17:40:20 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/22 21:25:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int	init_var(t_philo *philo, int index)
 	philo->r_taken = 0;
 	philo->l_taken = 0;
 	philo->think = 1;
+	if (pthread_mutex_init(&philo->death, NULL) != 0)
+		return (0);
 	if (pthread_mutex_init(&philo->fork, NULL) != 0)
 		return (0);
 	philo->f_taken = 0;
@@ -74,8 +76,6 @@ int	philo_life(t_env *env)
 {
 	int	index;
 
-	if (pthread_mutex_init(&env->death, NULL) != 0)
-		return (0);
 	if (!create_philo(env))
 		return (0);
 	while (1)

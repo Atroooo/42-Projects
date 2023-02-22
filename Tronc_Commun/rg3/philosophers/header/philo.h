@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/22 17:24:31 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/22 21:23:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ typedef struct s_philo
 	int				m_eat;
 	long long		last_eat;
 	int				dead;
-	pthread_mutex_t	fork;
 	int				f_taken;
 	int				r_taken;
 	int				l_taken;
 	int				think;
+	pthread_mutex_t	fork;
+	pthread_mutex_t	death;
 	struct s_env	*data;
 }	t_philo;
 
 typedef struct s_env
 {
-	pthread_mutex_t	death;
 	t_philo			*philo;
 	int				nb_philo;
 	long long		time_to_die;

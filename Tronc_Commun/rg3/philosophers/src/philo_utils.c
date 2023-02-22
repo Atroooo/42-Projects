@@ -33,7 +33,10 @@ static void	set_dead(t_env *env, int s)
 	while (index < env->nb_philo)
 	{
 		if (s == 1)
+		{
 			env->philo[index].dead = 1;
+			pthread_mutex_lock(&env->philo[index].death);
+		}
 		else if (s == 2)
 			env->philo[index].dead = 2;
 		index++;
