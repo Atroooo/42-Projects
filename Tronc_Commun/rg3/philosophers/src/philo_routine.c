@@ -22,13 +22,13 @@ int	take_fork(t_philo *philo, long long st)
 			printf("%lld %d has taken a fork\n", timestamp() - st, philo->pos);
 			return (1);
 		}
-		else if ((philo + 1) && (philo + 1)->f_taken == 0)
+		else if ((philo + 1) && (philo + 1)->f_taken == 0 && (philo + 1)->fork.__data.__lock == 0)
 		{
 			lock_fork(philo, philo + 1, 0);
 			printf("%lld %d has taken a fork\n", timestamp() - st, philo->pos);
 			return (1);
 		}
-		else if ((philo - 1) && (philo - 1)->f_taken == 0)
+		else if ((philo - 1) && (philo - 1)->f_taken == 0 && (philo - 1)->fork.__data.__lock == 0)
 		{
 			lock_fork(philo, philo - 1, 1);
 			printf("%lld %d has taken a fork\n", timestamp() - st, philo->pos);

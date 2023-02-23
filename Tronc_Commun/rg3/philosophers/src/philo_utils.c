@@ -32,12 +32,8 @@ static void	set_dead(t_env *env, int s)
 	index = 0;
 	while (index < env->nb_philo)
 	{
+		pthread_mutex_lock(&env->philo[index].death);
 		if (s == 1)
-		{
-			env->philo[index].dead = 1;
-			pthread_mutex_lock(&env->philo[index].death);
-		}
-		else if (s == 2)
 			env->philo[index].dead = 2;
 		index++;
 	}
@@ -54,7 +50,7 @@ int	check_dead(t_env *env)
 	{
 		if (env->philo[index].dead == 1)
 		{
-			set_dead(env, 1);
+			set_dead(env, 0);
 			return (1);
 		}
 		if (env->philo[index].dead == 2)
@@ -63,7 +59,7 @@ int	check_dead(t_env *env)
 	}
 	if (count == env->nb_philo)
 	{
-		set_dead(env, 2);
+		set_dead(env, 1);
 		return (1);
 	}
 	return (0);
