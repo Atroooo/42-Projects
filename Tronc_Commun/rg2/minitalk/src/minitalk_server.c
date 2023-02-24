@@ -3,28 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_server.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:15:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/15 13:02:09 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:40:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
 
-void	handler(int sig)
+void	handler(int sig, siginfo_t *info, void *context)
 {
-	static int	i = 0;
-	static char	c = 0;
-	
+	static int				i = 0;
+	static pid_t			client_pid = 0;
+	static unsigned char	c = 0;
+
+	(void)context;
+	if (!client_pid)
+		client_pid = info->si_pid;
 	if (sig == SIGUSR2)
-		c = c | 128 >> i;
-	i++;
-	if (i == 8)
 	{
+		c = c | 128 >> i;
+		kill(client_pid, SIGUSR1);
+	}
+	else
+		kill(client_pid, SIGUSR1);
+	if (++i == 8)
+	{
+		i = 0;
+		if (!c)
+		{
+			kill(client_pid, SIGUSR2);
+			write(1, "\n", 1);
+			client_pid = 0;
+			return ;	
+		}
 		write(1, &c, 1);
 		c = 0;
-		i = 0;
 	}
 }
 
@@ -41,10 +56,8 @@ int	main(int argc, char **argv)
 	}
 	pid = getpid();
 	ft_printf("Server PID is %d\n", pid);
-	sigemptyset(&sa.sa_mask);
-	sigaddset(&sa.sa_mask, SI_USER);
-	sa.sa_flags = SI_USER;
-	sa.sa_handler = handler;
+	sa.sa_sigaction = handler;
+	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
