@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:08:20 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/24 21:41:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/24 22:21:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,42 @@
 
 void	handler(int sig, siginfo_t *info, void *context)
 {
-	(void) info;
-	(void) context;
-	if (sig == SIGUSR1)
+	static int				i = 0;
+	static pid_t			server_pid = 0;
+	static unsigned char	c = 0;
+	static char 			*str;
+	unsigned int			base;
+	int	index = 0;
+	
+	str = (char *) context;
+	if (!server_pid)
+		server_pid = info->si_pid;
+	if (sig == SIGUSR2)
+		exit(0);
+	while (str[index])
 	{
-		usleep(100);
-		ft_printf("signal recu, %d \n", (int)sig);
+		c = str[index];
+		printf("%c\n", c);
+		i = 7;
+		base = 128;
+		while (i >= 0)
+		{
+			if (sig == SIGUSR1)
+			{
+				if (c < base)
+					kill(server_pid, SIGUSR1);
+				else
+				{
+					kill(server_pid, SIGUSR2);
+					c = c - base;
+				}
+				base = base / 2;
+				i--;
+			}
+			else
+				exit(1);	
+		}
+		str++;
 	}		
 }
 
@@ -48,22 +78,17 @@ void	send_c(unsigned char c, pid_t pid)
 int	main(int argc, char **argv)
 {
 	struct sigaction	sa;
-	int		index;
 	int		server_pid;
 
-	index = 0;
 	if (argc != 3 || !ft_strlen(argv[2]))
 		return (ft_printf("Use : ./client [PID] [STR]"), -1);
 	server_pid = ft_atoi(argv[1]);
 	sa.sa_sigaction = handler;
 	sa.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
-	while (argv[2][index])
-	{
-		send_c(argv[2][index], server_pid);
-		index++;
-	}
-	send_c('\n', server_pid);
+	send_c(argv[2][0], server_pid);
+	sigaction(SIGUSR1, &sa, (void *)argv[2] + 1);
+	sigaction(SIGUSR2, &sa, (void *)argv[2] + 1);
+	while (1)
+		sleep(10);
 	return (0);
 }

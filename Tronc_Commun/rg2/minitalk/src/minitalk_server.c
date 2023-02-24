@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:15:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/24 21:40:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/24 22:15:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,15 @@ void	handler(int sig, siginfo_t *info, void *context)
 		client_pid = info->si_pid;
 	if (sig == SIGUSR2)
 	{
+		ft_printf("Signal reçu 1\n");
 		c = c | 128 >> i;
 		kill(client_pid, SIGUSR1);
 	}
 	else
+	{
+		ft_printf("Signal reçu 0\n");
 		kill(client_pid, SIGUSR1);
+	}
 	if (++i == 8)
 	{
 		i = 0;

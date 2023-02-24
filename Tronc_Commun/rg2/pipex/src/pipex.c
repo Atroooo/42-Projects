@@ -41,7 +41,7 @@ static void	print_error(char *str)
 	exit(0);
 }
 
-
+//si une commande vide : ne pas fork et direct execute parent
 int	main(int argc, char **argv, char **env)
 {
 	int	p_fd[2];
