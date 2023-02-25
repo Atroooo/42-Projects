@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/22 21:23:30 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/25 16:39:51 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ typedef struct s_philo
 	long long		last_eat;
 	int				dead;
 	int				f_taken;
-	int				r_taken;
-	int				l_taken;
 	int				think;
+	pthread_mutex_t	stop;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	death;
 	struct s_env	*data;
@@ -57,15 +56,14 @@ int			philo_life(t_env *env);
 /* Utils functions */
 long long	timestamp(void);
 void		ft_usleep(int ms);
+void		print_msg(char *str, long long st, t_philo *philo);
 
 /* Actions functions */
 void		philo_sleep_think(t_philo *philo, long long start);
 int			take_fork(t_philo *philo, long long start);
-void		take_fork_s(t_philo *philo);
-void		lock_fork(t_philo *philo, t_philo *next_philo, int s);
+int			lock_fork(t_philo *philo, t_philo *next_philo);
+void		unlock_fork(t_philo *philo, t_philo *next_philo);
 void		philo_eat(t_philo *philo, long long start);
-void		eat_left(t_philo *philo);
-void		eat_right(t_philo *philo);
 
 /* Death functions */
 int			is_dead(t_philo *philo);

@@ -25,42 +25,9 @@ void	ft_usleep(int ms)
 	usleep(ms * 1000);
 }
 
-static void	set_dead(t_env *env, int s)
+void	print_msg(char *str, long long st, t_philo *philo)
 {
-	int	index;
-
-	index = 0;
-	while (index < env->nb_philo)
-	{
-		pthread_mutex_lock(&env->philo[index].death);
-		if (s == 1)
-			env->philo[index].dead = 2;
-		index++;
-	}
-}
-
-int	check_dead(t_env *env)
-{
-	int	index;
-	int	count;
-
-	index = 0;
-	count = 0;
-	while (index < env->nb_philo)
-	{
-		if (env->philo[index].dead == 1)
-		{
-			set_dead(env, 0);
-			return (1);
-		}
-		if (env->philo[index].dead == 2)
-			count++;
-		index++;
-	}
-	if (count == env->nb_philo)
-	{
-		set_dead(env, 1);
-		return (1);
-	}
-	return (0);
+	pthread_mutex_lock(&philo->stop);
+	printf("%lld %d %s", timestamp() - st, philo->pos, str);
+	pthread_mutex_unlock(&philo->stop);
 }

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/23 16:08:45 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:07:59 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,54 +19,32 @@ static void	*routine(void *phil)
 
 	philo = (t_philo *) phil;
 	start = timestamp();
-	while (!is_dead(philo))
+	while (!is_dead(philo) || philo->dead == 0)
 	{
 		if (take_fork(philo, start))
 			philo_eat(philo, start);
 		if (philo->think == 0)
 			philo_sleep_think(philo, start);
 	}
-	if (is_dead(philo) == 1)
+	if (is_dead(philo) == 1  || philo->dead == 0)
 	{
-		printf("%lld %d is dead.\n", timestamp() - start, philo->pos);
+		print_msg(" is dead.\n", start, philo);
 		return (NULL);
 	}
 	return (NULL);
 }
 
-static int	init_var(t_philo *philo, int index)
-{
-	philo->pos = index + 1;
-	philo->m_eat = 0;
-	philo->last_eat = 0;
-	philo->dead = 0;
-	philo->r_taken = 0;
-	philo->l_taken = 0;
-	philo->think = 1;
-	if (pthread_mutex_init(&philo->death, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&philo->fork, NULL) != 0)
-		return (0);
-	philo->f_taken = 0;
-	return (1);
-}
-
-static int	create_philo(t_env *env)
+static int	create_thread(t_env *env)
 {
 	int	index;
 
 	index = 0;
-	env->philo = malloc(sizeof(t_philo) * env->nb_philo);
-	if (!env->philo)
-		return (0);
 	while (index < env->nb_philo)
 	{
-		env->philo[index].data = env;
-		if (!init_var(&env->philo[index], index))
-			return (0);
 		if (pthread_create(&env->philo[index].th, NULL, \
 			&routine, &env->philo[index]) != 0)
 			return (0);
+		usleep(100);
 		index++;
 	}
 	return (1);
@@ -76,7 +54,7 @@ int	philo_life(t_env *env)
 {
 	int	index;
 
-	if (!create_philo(env))
+	if (!create_thread(env))
 		return (0);
 	while (1)
 	{

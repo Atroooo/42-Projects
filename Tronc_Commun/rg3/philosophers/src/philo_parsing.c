@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:07:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/17 20:18:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:08:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,41 @@ static int	is_digit(char *str)
 	while (str[index])
 	{
 		if ('0' < str[index] && str[index] > '9')
+			return (0);
+		index++;
+	}
+	return (1);
+}
+
+static int	init_var(t_philo *philo, int index)
+{
+	philo->pos = index + 1;
+	philo->m_eat = 0;
+	philo->last_eat = 0;
+	philo->dead = 0;
+	philo->think = 1;
+	if (pthread_mutex_init(&philo->stop, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&philo->death, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&philo->fork, NULL) != 0)
+		return (0);
+	philo->f_taken = 0;
+	return (1);
+}
+
+static int	create_philo(t_env *env)
+{
+	int	index;
+
+	index = 0;
+	env->philo = malloc(sizeof(t_philo) * env->nb_philo);
+	if (!env->philo)
+		return (0);
+	while (index < env->nb_philo)
+	{
+		env->philo[index].data = env;
+		if (!init_var(&env->philo[index], index))
 			return (0);
 		index++;
 	}
@@ -45,5 +80,9 @@ int	parsing(t_env *env, char **argv, int argc)
 	}
 	else
 		env->nb_eat = 0;
+	if (!create_philo(env))
+		return (0);
 	return (1);
 }
+
+
