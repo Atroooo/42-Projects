@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/25 17:07:59 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:54:25 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	*routine(void *phil)
 
 	philo = (t_philo *) phil;
 	start = timestamp();
-	while (!is_dead(philo) || philo->dead == 0)
+	while (!is_dead(philo) && philo->dead == 0)
 	{
 		if (take_fork(philo, start))
 			philo_eat(philo, start);
 		if (philo->think == 0)
 			philo_sleep_think(philo, start);
 	}
-	if (is_dead(philo) == 1  || philo->dead == 0)
+	if (is_dead(philo) == 1 && philo->dead == 1)
 	{
 		print_msg(" is dead.\n", start, philo);
 		return (NULL);
