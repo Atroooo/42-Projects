@@ -6,51 +6,30 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:08:20 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/24 22:21:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/26 21:39:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
 
+int	g_recep_confirm = 1;
+
 void	handler(int sig, siginfo_t *info, void *context)
-{
-	static int				i = 0;
-	static pid_t			server_pid = 0;
-	static unsigned char	c = 0;
-	static char 			*str;
-	unsigned int			base;
-	int	index = 0;
-	
-	str = (char *) context;
-	if (!server_pid)
-		server_pid = info->si_pid;
-	if (sig == SIGUSR2)
-		exit(0);
-	while (str[index])
+{	
+	static int	received = 0;
+
+	(void) info;
+	(void) context;
+	if (sig == SIGUSR1)
 	{
-		c = str[index];
-		printf("%c\n", c);
-		i = 7;
-		base = 128;
-		while (i >= 0)
-		{
-			if (sig == SIGUSR1)
-			{
-				if (c < base)
-					kill(server_pid, SIGUSR1);
-				else
-				{
-					kill(server_pid, SIGUSR2);
-					c = c - base;
-				}
-				base = base / 2;
-				i--;
-			}
-			else
-				exit(1);	
-		}
-		str++;
-	}		
+		g_recep_confirm = 1;
+		received++;
+	}
+	if (sig == SIGUSR2)
+	{
+		g_recep_confirm = 0;
+		ft_printf("Server received %d chars.\n", received);
+	}
 }
 
 void	send_c(unsigned char c, pid_t pid)
@@ -62,33 +41,44 @@ void	send_c(unsigned char c, pid_t pid)
 	base = 128;
 	while (i >= 0)
 	{
-		if (c < base)
+		if (c < base && g_recep_confirm == 1)
+		{
 			kill(pid, SIGUSR1);
-		else
+			g_recep_confirm = 0;
+			base = base / 2;
+			i--;
+		}
+		else if (g_recep_confirm == 1)
 		{
 			kill(pid, SIGUSR2);
 			c = c - base;
+			g_recep_confirm = 0;
+			base = base / 2;
+			i--;
 		}
-		base = base / 2;
-		i--;
-		usleep(100);
+		pause();
 	}
 }
 
 int	main(int argc, char **argv)
 {
 	struct sigaction	sa;
-	int		server_pid;
+	int					index;
+	int					server_pid;
 
+	index = 0;
 	if (argc != 3 || !ft_strlen(argv[2]))
 		return (ft_printf("Use : ./client [PID] [STR]"), -1);
 	server_pid = ft_atoi(argv[1]);
 	sa.sa_sigaction = handler;
 	sa.sa_flags = SA_SIGINFO;
-	send_c(argv[2][0], server_pid);
-	sigaction(SIGUSR1, &sa, (void *)argv[2] + 1);
-	sigaction(SIGUSR2, &sa, (void *)argv[2] + 1);
-	while (1)
-		sleep(10);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+	while (argv[2][index])
+	{
+		send_c(argv[2][index], server_pid);
+		index++;
+	}
+	send_c(0, server_pid);
 	return (0);
 }

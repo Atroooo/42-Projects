@@ -6,11 +6,18 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:15:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/24 22:15:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/26 21:41:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
+
+static void handler_utils(int *client_pid)
+{
+	kill(*client_pid, SIGUSR2);
+	write(1, "\n", 1);
+	*client_pid = 0;
+}
 
 void	handler(int sig, siginfo_t *info, void *context)
 {
@@ -23,24 +30,18 @@ void	handler(int sig, siginfo_t *info, void *context)
 		client_pid = info->si_pid;
 	if (sig == SIGUSR2)
 	{
-		ft_printf("Signal reçu 1\n");
 		c = c | 128 >> i;
 		kill(client_pid, SIGUSR1);
 	}
 	else
-	{
-		ft_printf("Signal reçu 0\n");
 		kill(client_pid, SIGUSR1);
-	}
 	if (++i == 8)
 	{
 		i = 0;
 		if (!c)
 		{
-			kill(client_pid, SIGUSR2);
-			write(1, "\n", 1);
-			client_pid = 0;
-			return ;	
+			handler_utils(&client_pid);
+			return ;
 		}
 		write(1, &c, 1);
 		c = 0;
@@ -65,6 +66,6 @@ int	main(int argc, char **argv)
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
-		sleep(10);
+		pause();
 	return (0);
 }
