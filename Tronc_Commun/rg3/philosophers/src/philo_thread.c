@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_thread.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/25 17:54:25 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/26 23:15:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	create_thread(t_env *env)
 		if (pthread_create(&env->philo[index].th, NULL, \
 			&routine, &env->philo[index]) != 0)
 			return (0);
-		usleep(100);
+		usleep(50);
 		index++;
 	}
 	return (1);

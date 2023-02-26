@@ -22,7 +22,11 @@ long long	timestamp(void)
 
 void	ft_usleep(int ms)
 {
-	usleep(ms * 1000);
+	long int	time;
+
+	time = timestamp();
+	while (timestamp() - time < ms)
+		usleep(ms / 10);
 }
 
 void	print_msg(char *str, long long st, t_philo *philo)
