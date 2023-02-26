@@ -59,12 +59,15 @@ int	main(int argc, char **argv, char **env)
 	if (check_args(argv[2], "./", 2) || \
 		check_args(argv[3], "./", 2))
 		print_error("Command error");
+	// if (!args_nempty(argv[3]) || !args_nempty(argv[4]))
+	// {
+	// 	parent(argv, env, p_fd);
+	// 	exit(0);
+	// }
 	pid = fork();
 	if (pid == -1)
 		print_error("Fork error");
 	if (pid == 0)
 		child(argv, env, p_fd);
 	parent(argv, env, p_fd);
-	waitpid(pid, NULL, 0);
-	waitpid(0, NULL, 0);
 }
