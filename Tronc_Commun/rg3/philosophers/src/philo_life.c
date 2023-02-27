@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/26 23:15:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/27 21:00:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,12 @@ static void	*routine(void *phil)
 
 	philo = (t_philo *) phil;
 	start = timestamp();
-	while (!is_dead(philo) && philo->dead == 0)
+	while (philo->data->stop_cond == 0)
 	{
 		if (take_fork(philo, start))
 			philo_eat(philo, start);
 		if (philo->think == 0)
 			philo_sleep_think(philo, start);
-	}
-	if (is_dead(philo) == 1 && philo->dead == 1)
-	{
-		print_msg(" is dead.\n", start, philo);
-		return (NULL);
 	}
 	return (NULL);
 }
@@ -44,7 +39,6 @@ static int	create_thread(t_env *env)
 		if (pthread_create(&env->philo[index].th, NULL, \
 			&routine, &env->philo[index]) != 0)
 			return (0);
-		usleep(50);
 		index++;
 	}
 	return (1);

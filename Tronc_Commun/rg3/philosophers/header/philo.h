@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/25 16:39:51 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/27 20:47:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ typedef struct s_philo
 	int				pos;
 	int				m_eat;
 	long long		last_eat;
-	int				dead;
 	int				f_taken;
 	int				think;
 	pthread_mutex_t	stop;
 	pthread_mutex_t	fork;
-	pthread_mutex_t	death;
 	struct s_env	*data;
 }	t_philo;
 
 typedef struct s_env
 {
 	t_philo			*philo;
+	pthread_mutex_t	death;
+	int				stop_cond;
 	int				nb_philo;
 	long long		time_to_die;
 	long long		time_to_eat;
@@ -64,9 +64,6 @@ int			take_fork(t_philo *philo, long long start);
 int			lock_fork(t_philo *philo, t_philo *next_philo);
 void		unlock_fork(t_philo *philo, t_philo *next_philo);
 void		philo_eat(t_philo *philo, long long start);
-
-/* Death functions */
-int			is_dead(t_philo *philo);
 int			check_dead(t_env *env);
 
 #endif

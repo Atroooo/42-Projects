@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:01:41 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/25 16:42:14 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/27 21:03:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	lock_fork(t_philo *philo, t_philo *next_philo)
 	}
 	return (0);
 }
-
 
 void	unlock_fork(t_philo *philo, t_philo *next_philo)
 {
