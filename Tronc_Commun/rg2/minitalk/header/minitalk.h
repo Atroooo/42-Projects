@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:54:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/01/19 14:17:23 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:07:35 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/header/libft.h"
+
+typedef struct	s_data
+{
+	pid_t	client_pid;
+	char 	*str;
+	int		state;
+	int		len;
+}	t_data;
 
 #endif

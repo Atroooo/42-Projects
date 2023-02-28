@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:08:20 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/28 13:54:30 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:35:43 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,46 +28,55 @@ void	handler(int sig, siginfo_t *info, void *context)
 	if (sig == SIGUSR2)
 	{
 		g_recep_confirm = 0;
-		ft_printf("Server received %d chars.\n", received);
+		ft_printf("Server received %d bytes.\n", received);
 		exit(0);
 	}
 }
 
-void	send_c(unsigned char c, pid_t pid)
+void	send_len(size_t len, pid_t pid)
 {
-	int				i;
-	unsigned int	base;
+	int	bit;
 
-	i = 7;
-	base = 128;
-	while (i >= 0)
+	bit = 32;
+	while (--bit >= 0)
 	{
-		if (c < base)
-		{
-			base = base / 2;
-			i--;
-			kill(pid, SIGUSR1);
-		}
-		else
-		{
-			c = c - base;
-			base = base / 2;
-			i--;
+		if (len >> bit & 1)
 			kill(pid, SIGUSR2);
-		}
+		else
+			kill(pid, SIGUSR1);
 		while (!g_recep_confirm)
 			pause();
 		g_recep_confirm = 0;
 	}
 }
 
+void	send_str(char *str, pid_t pid)
+{
+	int	index;
+	int	bit;
+
+	index = -1;
+	while (str[++index])
+	{
+		bit = 8;
+		while (--bit >= 0)
+		{
+			if (str[index] >> bit & 1)
+				kill(pid, SIGUSR2);
+			else
+				kill(pid, SIGUSR1);
+			while (!g_recep_confirm)
+				pause();
+			g_recep_confirm = 0;
+		}
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	struct sigaction	sa;
-	int					index;
 	int					server_pid;
 
-	index = 0;
 	if (argc != 3 || !ft_strlen(argv[2]))
 		return (ft_printf("Use : ./client [PID] [STR]"), -1);
 	server_pid = ft_atoi(argv[1]);
@@ -75,11 +84,7 @@ int	main(int argc, char **argv)
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-	while (argv[2][index])
-	{
-		send_c(argv[2][index], server_pid);
-		index++;
-	}
-	send_c(0, server_pid);
+	send_len(ft_strlen(argv[2]), server_pid);
+	send_str(argv[2], server_pid);
 	return (0);
 }
