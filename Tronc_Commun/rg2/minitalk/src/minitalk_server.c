@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_server.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:15:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/27 22:01:34 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 13:55:56 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
 
-static void handler_utils(int *client_pid)
+static void	handler_utils(int *client_pid)
 {
 	kill(*client_pid, SIGUSR2);
 	write(1, "\n", 1);

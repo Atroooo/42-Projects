@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_client.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:08:20 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/26 21:39:34 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 13:54:30 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minitalk.h"
 
-int	g_recep_confirm = 1;
+int	g_recep_confirm = 0;
 
 void	handler(int sig, siginfo_t *info, void *context)
 {	
@@ -20,7 +20,7 @@ void	handler(int sig, siginfo_t *info, void *context)
 
 	(void) info;
 	(void) context;
-	if (sig == SIGUSR1)
+	if (sig == SIGUSR1 || sig == SIGUSR2)
 	{
 		g_recep_confirm = 1;
 		received++;
@@ -29,6 +29,7 @@ void	handler(int sig, siginfo_t *info, void *context)
 	{
 		g_recep_confirm = 0;
 		ft_printf("Server received %d chars.\n", received);
+		exit(0);
 	}
 }
 
@@ -41,22 +42,22 @@ void	send_c(unsigned char c, pid_t pid)
 	base = 128;
 	while (i >= 0)
 	{
-		if (c < base && g_recep_confirm == 1)
+		if (c < base)
 		{
+			base = base / 2;
+			i--;
 			kill(pid, SIGUSR1);
-			g_recep_confirm = 0;
-			base = base / 2;
-			i--;
 		}
-		else if (g_recep_confirm == 1)
+		else
 		{
-			kill(pid, SIGUSR2);
 			c = c - base;
-			g_recep_confirm = 0;
 			base = base / 2;
 			i--;
+			kill(pid, SIGUSR2);
 		}
-		pause();
+		while (!g_recep_confirm)
+			pause();
+		g_recep_confirm = 0;
 	}
 }
 
