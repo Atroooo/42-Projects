@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_routine_utils.c                              :+:      :+:    :+:   */
+/*   philo_actions_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:01:41 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/27 21:03:45 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:31:32 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	lock_fork(t_philo *philo, t_philo *next_philo)
 		return (0);
 	if (philo->f_taken == 0 && next_philo->f_taken == 0)
 	{
-		philo->f_taken = 1;
-		next_philo->f_taken = 1;
 		if (philo->pos == philo->data->nb_philo)
 			lock_mutex(philo, next_philo, 1);
 		else
 			lock_mutex(philo, next_philo, 2);
+		philo->f_taken = 1;
+		next_philo->f_taken = 1;
 		return (1);
 	}
 	return (0);

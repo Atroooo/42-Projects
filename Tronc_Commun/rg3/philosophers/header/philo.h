@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/27 20:47:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:35:36 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct s_philo
 {
 	pthread_t		th;
+	long long		start;
 	int				pos;
 	int				m_eat;
 	long long		last_eat;
@@ -38,12 +39,14 @@ typedef struct s_env
 {
 	t_philo			*philo;
 	pthread_mutex_t	death;
+	struct timeval	tv;
 	int				stop_cond;
 	int				nb_philo;
+	int				nb_eat;
 	long long		time_to_die;
 	long long		time_to_eat;
 	long long		time_to_sleep;
-	int				nb_eat;
+	long long		time_start;
 }	t_env;
 
 /* Parsing functions */
@@ -54,16 +57,15 @@ int			parsing(t_env *env, char **argv, int argc);
 int			philo_life(t_env *env);
 
 /* Utils functions */
-long long	timestamp(void);
-void		ft_usleep(int ms);
-void		print_msg(char *str, long long st, t_philo *philo);
+long long	timestamp(t_env *env);
+void		print_msg(char *str, t_philo *philo);
 
 /* Actions functions */
-void		philo_sleep_think(t_philo *philo, long long start);
-int			take_fork(t_philo *philo, long long start);
+void		philo_sleep_think(t_philo *philo);
+int			take_fork(t_philo *philo);
 int			lock_fork(t_philo *philo, t_philo *next_philo);
 void		unlock_fork(t_philo *philo, t_philo *next_philo);
-void		philo_eat(t_philo *philo, long long start);
+void		philo_eat(t_philo *philo);
 int			check_dead(t_env *env);
 
 #endif

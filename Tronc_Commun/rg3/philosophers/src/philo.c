@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/27 20:41:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:11:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	one_philo(t_env *env)
 {
 	long long	start;
 
-	start = timestamp();
-	ft_usleep(env->time_to_die);
-	printf("%lld 1 is dead.\n", timestamp() - start);
+	start = timestamp(env);
+	usleep(env->time_to_die * 1000);
+	printf("%lld 1 is dead.\n", timestamp(env) - start);
 	free(env);
 	return (1);
 }

@@ -1,30 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_thread.c                                     :+:      :+:    :+:   */
+/*   philo_life.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/27 21:00:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:12:22 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
+static int	stop_cond(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->stop);
+	if (philo->data->stop_cond == 0)
+	{
+		pthread_mutex_unlock(&philo->stop);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->stop);
+	return (0);
+}
+
 static void	*routine(void *phil)
 {
 	t_philo		*philo;
-	long long	start;
 
 	philo = (t_philo *) phil;
-	start = timestamp();
-	while (philo->data->stop_cond == 0)
+	philo->start = philo->data->time_start;
+	while (stop_cond(philo))
 	{
-		if (take_fork(philo, start))
-			philo_eat(philo, start);
+		if (take_fork(philo))
+			philo_eat(philo);
 		if (philo->think == 0)
-			philo_sleep_think(philo, start);
+			philo_sleep_think(philo);
 	}
 	return (NULL);
 }
@@ -39,6 +50,7 @@ static int	create_thread(t_env *env)
 		if (pthread_create(&env->philo[index].th, NULL, \
 			&routine, &env->philo[index]) != 0)
 			return (0);
+		usleep(50);
 		index++;
 	}
 	return (1);

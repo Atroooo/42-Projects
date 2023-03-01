@@ -12,7 +12,7 @@
 
 #include "../header/philo.h"
 
-int	take_fork(t_philo *philo, long long st)
+int	take_fork(t_philo *philo)
 {
 	t_philo	*next_philo;
 
@@ -21,16 +21,16 @@ int	take_fork(t_philo *philo, long long st)
 	else if (philo + 1)
 		next_philo = philo + 1;
 	if (lock_fork(philo, next_philo))
-		return (print_msg(" has taken a fork\n", st, philo), 1);
+		return (print_msg(" has taken a fork\n", philo), 1);
 	return (0);
 }
 
-void	philo_sleep_think(t_philo *philo, long long start)
+void	philo_sleep_think(t_philo *philo)
 {
-	print_msg(" is sleeping\n", start, philo);
-	ft_usleep(philo->data->time_to_sleep);
+	print_msg(" is sleeping\n", philo);
+	usleep(philo->data->time_to_sleep * 1000);
 	philo->think = 1;
-	print_msg(" is thinking\n", start, philo);
+	print_msg(" is thinking\n", philo);
 }
 
 static void	depose_fork(t_philo *philo)
@@ -44,14 +44,14 @@ static void	depose_fork(t_philo *philo)
 	unlock_fork(philo, next_philo);
 }
 
-void	philo_eat(t_philo *philo, long long st)
+void	philo_eat(t_philo *philo)
 {
-	print_msg(" is eating\n", st, philo);
+	print_msg(" is eating\n", philo);
 	pthread_mutex_lock(&philo->stop);
-	philo->last_eat = timestamp();
+	philo->last_eat = timestamp(philo->data) + philo->data->time_to_eat;
 	philo->m_eat++;
 	pthread_mutex_unlock(&philo->stop);
-	ft_usleep(philo->data->time_to_eat);
+	usleep(philo->data->time_to_eat * 1000);
 	depose_fork(philo);
 	philo->think = 0;
 	return ;
@@ -65,10 +65,12 @@ int	check_dead(t_env *env)
 	while (i < env->nb_philo)
 	{
 		pthread_mutex_lock(&env->death);
-		if ((int)(timestamp() - env->philo[i].last_eat) >= env->time_to_die)
+		// printf("pos %d ts %lld\n", env->philo[i].pos, (timestamp(env) - env->philo[i].last_eat));
+		if ((timestamp(env) - env->philo[i].last_eat) >= env->time_to_die)
 		{
-			print_msg(" is dead\n", timestamp(), env->philo + i);
 			env->stop_cond = 1;
+			printf("%lld %d is dead\n", timestamp(env), \
+				(env->philo + i)->pos);
 			pthread_mutex_unlock(&env->death);
 			return (1);
 		}

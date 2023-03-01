@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_parsing.c                                    :+:      :+:    :+:   */
+/*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:07:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/27 21:03:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:10:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static int	create_philo(t_env *env)
 	int	index;
 
 	index = 0;
+	gettimeofday(&env->tv, NULL);
+    env->time_start = 1000000 * env->tv.tv_sec \
+                            + env->tv.tv_usec;
 	if (pthread_mutex_init(&env->death, NULL) != 0)
 		return (0);
 	env->philo = malloc(sizeof(t_philo) * env->nb_philo);
