@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_client.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:08:20 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/28 17:35:43 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/01 20:40:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	handler(int sig, siginfo_t *info, void *context)
 		g_recep_confirm = 1;
 		received++;
 	}
-	if (sig == SIGUSR2)
+	if (sig == SIGUSR1)
 	{
-		g_recep_confirm = 0;
 		ft_printf("Server received %d bytes.\n", received);
 		exit(0);
 	}
@@ -80,6 +79,12 @@ int	main(int argc, char **argv)
 	if (argc != 3 || !ft_strlen(argv[2]))
 		return (ft_printf("Use : ./client [PID] [STR]"), -1);
 	server_pid = ft_atoi(argv[1]);
+	if (server_pid <= 0 || server_pid > INT_MAX)
+	{
+		ft_printf("Invalid PID\n");
+		exit (EXIT_FAILURE);
+	}
+	sigemptyset(&sa.sa_mask);
 	sa.sa_sigaction = handler;
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
