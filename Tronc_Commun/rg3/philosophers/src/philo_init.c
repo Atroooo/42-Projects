@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:07:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/02 13:01:14 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/02 22:59:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int	create_philo(t_env *env)
 		return (0);
 	while (index < env->nb_philo)
 	{
+		env->philo[index].start = env->time_start;
 		env->philo[index].data = env;
 		if (!init_var(&env->philo[index], index))
 			return (0);

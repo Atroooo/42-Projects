@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/02 13:52:02 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/02 23:26:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	pthread_mutex_t	stop;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	death;
+	struct s_philo	*next_philo;
 	struct s_env	*data;
 }	t_philo;
 
@@ -65,9 +66,7 @@ void		print_msg(char *str, t_philo *philo);
 /* Actions functions */
 void		philo_sleep_think(t_philo *philo);
 int			take_fork(t_philo *philo);
-void		depose_fork(t_philo *philo);
-int			lock_fork(t_philo *philo, t_philo *next_philo);
-void		unlock_fork(t_philo *philo, t_philo *next_philo);
+void		depose_fork(t_philo *philo, t_philo *next_philo);
 void		philo_eat(t_philo *philo);
 int			check_dead(t_env *env);
 

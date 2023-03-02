@@ -23,12 +23,13 @@ void	philo_sleep_think(t_philo *philo)
 void	philo_eat(t_philo *philo)
 {
 	print_msg(" is eating\n", philo);
+	pthread_mutex_lock(&philo->stop);
 	philo->last_eat = timestamp(philo->data) + philo->data->time_to_eat;
 	philo->m_eat++;
-	usleep(philo->data->time_to_eat * 1000);
-	depose_fork(philo);
 	philo->think = 0;
-	return ;
+	pthread_mutex_unlock(&philo->stop);
+	usleep(philo->data->time_to_eat * 1000);
+	depose_fork(philo, philo->next_philo);
 }
 
 static int	end_meal(t_philo *philo)

@@ -7,8 +7,7 @@ HEADER_DIR 	= 			header/
 SRCS_DIR	= 			src/
 BUILD_DIR	= 			${SRCS_DIR}build/
 
-SRCS 		= 			philo.c philo_atoi.c \
-						philo_init.c philo_life.c \
+SRCS 		= 			philo.c philo_init.c philo_life.c \
 						philo_utils.c philo_actions.c philo_actions_utils.c
 						
 				 

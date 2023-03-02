@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:01:41 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/02 13:52:22 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/02 23:27:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,7 @@ static void	lock_mutex(t_philo *philo, t_philo *next_philo, int s)
 	}
 }
 
-int	lock_fork(t_philo *philo, t_philo *next_philo)
-{
-	if (!philo || !next_philo)
-		return (0);
-	pthread_mutex_lock(&philo->stop);
-	if (philo->f_taken == 0 && next_philo->f_taken == 0)
-	{
-		pthread_mutex_unlock(&philo->stop);
-		if (philo->pos == philo->data->nb_philo)
-			lock_mutex(philo, next_philo, 1);
-		else
-			lock_mutex(philo, next_philo, 2);
-		philo->f_taken = 1;
-		next_philo->f_taken = 1;
-		return (1);
-	}
-	pthread_mutex_unlock(&philo->stop);
-	return (0);
-}
-
-void	depose_fork(t_philo *philo)
-{
-	t_philo	*next_philo;
-
-	if (philo->pos == philo->data->nb_philo)
-		next_philo = philo - (philo->pos - 1);
-	else
-		next_philo = philo + 1;
-	unlock_fork(philo, next_philo);
-}
-
-void	unlock_fork(t_philo *philo, t_philo *next_philo)
+void	depose_fork(t_philo *philo, t_philo *next_philo)
 {
 	if (!philo || !next_philo)
 		return ;
@@ -71,13 +40,21 @@ void	unlock_fork(t_philo *philo, t_philo *next_philo)
 
 int	take_fork(t_philo *philo)
 {
-	t_philo	*next_philo;
-
-	if (philo->pos == philo->data->nb_philo)
-		next_philo = philo - (philo->pos - 1);
-	else if (philo + 1)
-		next_philo = philo + 1;
-	if (lock_fork(philo, next_philo))
-		return (print_msg(" has taken a fork\n", philo), 1);
+	if (!philo || !philo->next_philo)
+		return (0);
+	pthread_mutex_lock(&philo->stop);
+	if (philo->f_taken == 0 && philo->next_philo->f_taken == 0)
+	{
+		pthread_mutex_unlock(&philo->stop);
+		if (philo->pos == philo->data->nb_philo)
+			lock_mutex(philo, philo->next_philo, 1);
+		else
+			lock_mutex(philo, philo->next_philo, 2);
+		philo->f_taken = 1;
+		philo->next_philo->f_taken = 1;
+		print_msg(" has taken a fork\n", philo);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->stop);
 	return (0);
 }
