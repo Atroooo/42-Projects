@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/01 17:35:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:52:02 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,19 @@ typedef struct s_philo
 	int				think;
 	pthread_mutex_t	stop;
 	pthread_mutex_t	fork;
+	pthread_mutex_t	death;
 	struct s_env	*data;
 }	t_philo;
 
 typedef struct s_env
 {
 	t_philo			*philo;
-	pthread_mutex_t	death;
+	pthread_mutex_t	print;
 	struct timeval	tv;
 	int				stop_cond;
 	int				nb_philo;
 	int				nb_eat;
+	int				count;
 	long long		time_to_die;
 	long long		time_to_eat;
 	long long		time_to_sleep;
@@ -63,6 +65,7 @@ void		print_msg(char *str, t_philo *philo);
 /* Actions functions */
 void		philo_sleep_think(t_philo *philo);
 int			take_fork(t_philo *philo);
+void		depose_fork(t_philo *philo);
 int			lock_fork(t_philo *philo, t_philo *next_philo);
 void		unlock_fork(t_philo *philo, t_philo *next_philo);
 void		philo_eat(t_philo *philo);

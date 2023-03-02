@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:07:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/01 17:10:06 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:01:14 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int	init_var(t_philo *philo, int index)
 		return (0);
 	if (pthread_mutex_init(&philo->fork, NULL) != 0)
 		return (0);
+	if (pthread_mutex_init(&philo->death, NULL) != 0)
+		return (0);
 	philo->f_taken = 0;
 	return (1);
 }
@@ -48,9 +50,8 @@ static int	create_philo(t_env *env)
 
 	index = 0;
 	gettimeofday(&env->tv, NULL);
-    env->time_start = 1000000 * env->tv.tv_sec \
-                            + env->tv.tv_usec;
-	if (pthread_mutex_init(&env->death, NULL) != 0)
+	env->time_start = 1000000 * env->tv.tv_sec + env->tv.tv_usec;
+	if (pthread_mutex_init(&env->print, NULL) != 0)
 		return (0);
 	env->philo = malloc(sizeof(t_philo) * env->nb_philo);
 	if (!env->philo)
@@ -86,6 +87,7 @@ int	parsing(t_env *env, char **argv, int argc)
 		|| env->time_to_sleep < 0 || env->nb_eat < 0)
 		return (0);
 	env->stop_cond = 0;
+	env->count = 0;
 	if (!create_philo(env))
 		return (0);
 	return (1);

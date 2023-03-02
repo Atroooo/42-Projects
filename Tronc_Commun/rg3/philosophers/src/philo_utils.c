@@ -14,18 +14,18 @@
 
 long long	timestamp(t_env *env)
 {
-	long long		time;
+	long long	time;
 
 	gettimeofday(&env->tv, NULL);
-    time = 1000000 * env->tv.tv_sec + env->tv.tv_usec;
-    time = (time - env->time_start) * 0.001;
-    return (time);
+	time = 1000000 * env->tv.tv_sec + env->tv.tv_usec;
+	time = (time - env->time_start) * 0.001;
+	return (time);
 }
 
 void	print_msg(char *str, t_philo *philo)
 {
-	pthread_mutex_lock(&philo->stop);
+	pthread_mutex_lock(&philo->data->print);
 	if (philo->data->stop_cond == 0)
-		printf("%lld %d %s", timestamp(philo->data), philo->pos, str);
-	pthread_mutex_unlock(&philo->stop);
+		printf("%lld %d%s", timestamp(philo->data), philo->pos, str);
+	pthread_mutex_unlock(&philo->data->print);
 }

@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/01 18:12:22 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:28:42 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	*routine(void *phil)
 		if (philo->think == 0)
 			philo_sleep_think(philo);
 	}
+	if (!stop_cond(philo))
+		depose_fork(philo);
 	return (NULL);
 }
 
