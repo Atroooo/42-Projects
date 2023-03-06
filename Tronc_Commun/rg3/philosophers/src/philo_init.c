@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:07:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/02 22:59:57 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/06 23:22:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int	init_var(t_philo *philo, int index)
 	philo->pos = index + 1;
 	philo->m_eat = 0;
 	philo->last_eat = 0;
-	philo->think = 1;
 	if (pthread_mutex_init(&philo->stop, NULL) != 0)
 		return (0);
 	if (pthread_mutex_init(&philo->fork, NULL) != 0)

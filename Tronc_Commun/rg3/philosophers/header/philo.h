@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/03 18:25:47 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/06 23:21:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_philo
 	int				m_eat;
 	long long		last_eat;
 	int				f_taken;
-	int				think;
 	pthread_mutex_t	stop;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	death;
@@ -59,9 +58,6 @@ int			parsing(t_env *env, char **argv, int argc);
 /* Thread functions */
 int			philo_life(t_env *env);
 
-/* Utils functions */
-long long	timestamp(t_env *env);
-void		print_msg(char *str, t_philo *philo);
 
 /* Actions functions */
 void		philo_sleep_think(t_philo *philo);
@@ -69,5 +65,9 @@ void		take_fork(t_philo *philo);
 void		depose_fork(t_philo *philo, t_philo *next_philo);
 void		philo_eat(t_philo *philo);
 int			check_dead(t_env *env);
+
+/* Utils functions */
+long long	timestamp(t_env *env);
+void		print_msg(char *str, t_philo *philo);
 
 #endif
