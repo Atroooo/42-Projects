@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:01:41 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/06 23:31:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/07 11:35:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ static void	lock_mutex(t_philo *philo, t_philo *next_philo, int s)
 {
 	if (s == 1)
 	{
-		printf("s1 philo->pos = %d and next_philo->pos = %d\n", philo->pos, philo->next_philo->pos);
 		pthread_mutex_lock(&next_philo->fork);
 		pthread_mutex_lock(&philo->fork);
 	}
 	if (s == 2)
 	{
-		printf("s2 philo->pos = %d and next_philo->pos = %d\n", philo->pos, philo->next_philo->pos);
 		pthread_mutex_lock(&philo->fork);
 		pthread_mutex_lock(&next_philo->fork);
 	}
@@ -49,14 +47,14 @@ void	take_fork(t_philo *philo)
 	// {
 	// 	if (philo->stop.__data.__lock == 1)
 	// 		pthread_mutex_unlock(&philo->stop);
-	if (philo->pos == philo->data->nb_philo)
-		lock_mutex(philo, philo->next_philo, 1);
-	else
-		lock_mutex(philo, philo->next_philo, 2);
-		// philo->f_taken = 1;
-		// philo->next_philo->f_taken = 1;
-	print_msg(" has taken a fork\n", philo);
-	}
-// 	if (philo->stop.__data.__lock == 1)
-// 		pthread_mutex_unlock(&philo->stop);
-// }
+		if (philo->pos == philo->data->nb_philo)
+			lock_mutex(philo, philo->next_philo, 1);
+		else
+			lock_mutex(philo, philo->next_philo, 2);
+		philo->f_taken = 1;
+		philo->next_philo->f_taken = 1;
+		print_msg(" has taken a fork\n", philo);
+	// }
+	// if (philo->stop.__data.__lock == 1)
+	// 	pthread_mutex_unlock(&philo->stop);
+}
