@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:08:20 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/01 20:40:45 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/08 21:55:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,30 @@ void	handler(int sig, siginfo_t *info, void *context)
 	}
 }
 
+void	wait_signal(void)
+{
+	int	time;
+
+	time = 0;
+	if (g_recep_confirm == 1)
+	{
+		g_recep_confirm = 0;
+		return ;
+	}
+	while (time < 2000000)
+	{
+		if (g_recep_confirm == 1)
+		{
+			g_recep_confirm = 0;
+			return ;
+		}
+		time = time + 100;
+		usleep(100);
+	}
+	ft_printf("Server is not responding.\n");
+	exit(EXIT_FAILURE);
+}
+
 void	send_len(size_t len, pid_t pid)
 {
 	int	bit;
@@ -43,9 +67,7 @@ void	send_len(size_t len, pid_t pid)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		while (!g_recep_confirm)
-			pause();
-		g_recep_confirm = 0;
+		wait_signal();
 	}
 }
 
@@ -64,9 +86,7 @@ void	send_str(char *str, pid_t pid)
 				kill(pid, SIGUSR2);
 			else
 				kill(pid, SIGUSR1);
-			while (!g_recep_confirm)
-				pause();
-			g_recep_confirm = 0;
+			wait_signal();
 		}
 	}
 }

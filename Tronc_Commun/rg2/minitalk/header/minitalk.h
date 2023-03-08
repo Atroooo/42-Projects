@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:54:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/01 20:42:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/08 21:56:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <limits.h>
 # include "../libft/header/libft.h"
 
-typedef struct	s_data
+typedef struct s_data
 {
 	pid_t	client_pid;
-	char 	*str;
+	char	*str;
 	char	c;
 	int		bits;
 	int		state;
