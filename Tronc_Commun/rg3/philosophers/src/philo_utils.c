@@ -30,6 +30,15 @@ void	print_msg(char *str, t_philo *philo)
 	pthread_mutex_unlock(&philo->data->print);
 }
 
+void	ft_usleep(long long time, t_philo *philo)
+{
+	long long	start;
+
+	start = timestamp(philo->data);
+	while (timestamp(philo->data) - start < time)
+		usleep(100);
+}
+
 static int	return_number(long nb, int sign)
 {
 	if ((nb * sign) > -2147483648 && (nb * sign) < 2147483647)

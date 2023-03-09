@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/01 17:11:09 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:40:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	free_env(t_env *env)
 	{
 		pthread_mutex_destroy(&env->philo[index].fork);
 		pthread_mutex_destroy(&env->philo[index].stop);
+		pthread_mutex_destroy(&env->philo[index].death);
 		index++;
 	}
 	if (env->philo)
 		free(env->philo);
+	pthread_mutex_destroy(&env->print);
 	if (env)
 		free(env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_life.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/07 13:38:06 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/03/09 21:38:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static void	*routine(void *phil)
 	while (stop_cond(philo))
 	{
 		take_fork(philo);
-		philo_eat(philo);
-		philo_sleep_think(philo);
+		philo_eat_sleep_think(philo);
 	}
 	return (NULL);
 }
@@ -68,7 +67,7 @@ int	philo_life(t_env *env)
 	{
 		if (check_dead(env))
 			break ;
-		usleep(50);
+		usleep(100);
 	}
 	index = 0;
 	while (index < env->nb_philo)

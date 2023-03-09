@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:07:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/06 23:22:17 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:47:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	init_var(t_philo *philo, int index)
 		return (0);
 	if (pthread_mutex_init(&philo->death, NULL) != 0)
 		return (0);
-	philo->f_taken = 0;
 	return (1);
 }
 

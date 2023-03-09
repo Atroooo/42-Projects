@@ -12,22 +12,18 @@
 
 #include "../header/philo.h"
 
-void	philo_sleep_think(t_philo *philo)
-{
-	print_msg(" is sleeping\n", philo);
-	usleep(philo->data->time_to_sleep * 1000);
-	print_msg(" is thinking\n", philo);
-}
-
-void	philo_eat(t_philo *philo)
+void	philo_eat_sleep_think(t_philo *philo)
 {
 	print_msg(" is eating\n", philo);
 	pthread_mutex_lock(&philo->stop);
 	philo->last_eat = timestamp(philo->data);
 	philo->m_eat++;
 	pthread_mutex_unlock(&philo->stop);
-	usleep(philo->data->time_to_eat * 1000);
+	ft_usleep(philo->data->time_to_eat, philo);
 	depose_fork(philo, philo->next_philo);
+	print_msg(" is sleeping\n", philo);
+	ft_usleep(philo->data->time_to_sleep, philo);
+	print_msg(" is thinking\n", philo);
 }
 
 static int	end_meal(t_philo *philo)
