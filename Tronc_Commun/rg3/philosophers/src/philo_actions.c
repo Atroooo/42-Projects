@@ -42,7 +42,7 @@ int	check_dead(t_env *env)
 	while (++i < env->nb_philo)
 	{
 		pthread_mutex_lock(&env->philo[i].death);
-		if ((timestamp(env) - env->philo[i].last_eat) >= env->time_to_die)
+		if ((timestamp(env) - env->philo[i].last_eat) > env->time_to_die)
 		{
 			env->stop_cond = 1;
 			printf("%lld %d is dead\n", timestamp(env), (env->philo + i)->pos);
