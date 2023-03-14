@@ -31,6 +31,7 @@ clean:
 			$(RM) $(OBJS_CLIENT)
 			$(RM) $(OBJS_SERVER)
 			$(RM) $(DEPENDS)
+			$(RM) $(LIBFT_COMPILED)
 
 fclean:     clean
 			$(RM) $(SERVER)
