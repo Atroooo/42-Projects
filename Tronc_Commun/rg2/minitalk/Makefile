@@ -1,45 +1,54 @@
-.PHONY: all clean fclean re libft
+### FLAGS ###
+CC = gcc
+RM = rm -f
+CFLAGS = -Wall -Wextra -Werror 
 
-NAME_SERVER				= server
-NAME_CLIENT				= client
+#### LIBFT HEADER COMPILED ####
+LIBFT_COMPILED = libft/libft.a
 
-BUILD_DIR				= src/build/
+### FINAL COMPILATION FILE ###
+NAME = compiled
+CLIENT = ./client
+SERVER = ./server
 
-SRCS_DIR 				= src/
-SRCS_SERVER				= minitalk_server.c
-SRCS_CLIENT				= minitalk_client.c
+### SERVER FILES ###
+SRCS_SERVER = src/minitalk_server.c
+OBJS_SERVER = $(SRCS_SERVER:.c=.o)
 
-OBJS_SERVER 			= ${SRCS_SERVER:%.c=$(BUILD_DIR)%.o}
-OBJS_CLIENT 			= ${SRCS_CLIENT:%.c=$(BUILD_DIR)%.o}
+### CLIENT FILES ###
+SRCS_CLIENT = src/minitalk_client.c
+OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
+DEPENDS := $(SRCS_CLIENT:.c=.d) $(SRCS_SERVER:.c=.d)
 
-CC 						= gcc
-FLAGS 					= -Wall -Wextra -Werror
+#### RULES ####
+all:		libft_comp $(SERVER) $(CLIENT) Makefile
 
-HEADER 					= header/minitalk.h
-
-RM 						= rm -f
-
-all:    				${NAME_SERVER} ${NAME_CLIENT}
-
-$(BUILD_DIR)%.o: 		${SRCS_DIR}%.c ${HEADER}
-						@mkdir -p $(BUILD_DIR)
-						${CC} ${FLAGS} -include${HEADER} -c $< -o $@
-
-$(NAME_SERVER):    		$(OBJS_SERVER) ${HEADER}
-						make -C libft
-						${CC} ${FLAGS} -include${HEADER} $(OBJS_SERVER) libft/libft.a -o server
-
-$(NAME_CLIENT):    		$(OBJS_CLIENT) ${HEADER}
-						make -C libft
-						${CC} ${FLAGS} -include${HEADER} $(OBJS_CLIENT) libft/libft.a -o client
+%.o:%.c 	Makefile $(LIBFT_COMPILED)
+			$(CC) $(CFLAGS) -c $< -MD -o $@ -g3
 
 clean:
-						${RM} ${OBJS} libft/Build/*.o libft/libft.a $(BUILD_DIR)*.o
+			@$(MAKE) clean -C libft
+			$(RM) $(OBJS_CLIENT)
+			$(RM) $(OBJS_SERVER)
+			$(RM) $(DEPENDS)
 
-fclean:     			clean
-						${RM} ${NAME_SERVER} ${NAME_CLIENT}
+fclean:     clean
+			$(RM) $(SERVER)
+			$(RM) $(CLIENT)
 
-re:        				fclean all
+libft_comp:
+			@$(MAKE) all -C libft
 
-libft:
-						make -C libft
+$(CLIENT):  $(OBJS_CLIENT) $(LIBFT_COMPILED)
+			$(CC) $(OBJS_CLIENT) $(LIBFT_COMPILED) $(CFLAGS) -o $(CLIENT)
+
+$(SERVER):  $(OBJS_SERVER) $(LIBFT_COMPILED)
+			$(CC) $(OBJS_SERVER) $(LIBFT_COMPILED) $(CFLAGS) -o $(SERVER)
+
+re:    fclean all
+
+-include $(DEPENDS)
+
+#### SYSTEM ####
+
+.PHONY:  all clean fclean re libft_comp

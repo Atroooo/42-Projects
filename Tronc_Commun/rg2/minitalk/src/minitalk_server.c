@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_server.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:15:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/08 21:55:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/14 14:44:19 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	handler(int sig, siginfo_t *info, void *context)
 		signal = 0;
 	else if (sig == SIGUSR2)
 		signal = 1;
+	if (g_data.client_pid != info->si_pid)
+		g_data.state = 0;
 	if (g_data.state == 0)
 	{
 		g_data.client_pid = info->si_pid;
