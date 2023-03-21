@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/09 21:38:42 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/13 22:02:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int			parsing(t_env *env, char **argv, int argc);
 
 /* Thread functions */
 int			philo_life(t_env *env);
-
 
 /* Actions functions */
 void		take_fork(t_philo *philo);

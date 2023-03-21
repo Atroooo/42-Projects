@@ -97,7 +97,6 @@ void	parent(char **argv, char **env, int *p_fd)
 	close(p_fd[1]);
 	if (!args_nempty(argv[3]))
 		exit(0);
-    printf("\n\noui parent\n\n");
 	exec_cmd(argv[3], env);
 }
 
@@ -116,6 +115,5 @@ void	child(char **argv, char **env, int *p_fd)
 	close(p_fd[0]);
 	if (!args_nempty(argv[2]))
 		exit(0);
-    printf("\n\noui enfant\n\n");
 	exec_cmd(argv[2], env);
 }
