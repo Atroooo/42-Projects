@@ -81,7 +81,6 @@ static void	exec_cmd(char *cmd, char **env)
 	}
 }
 
-
 void	parent(char **argv, char **env, int *p_fd)
 {
 	int	fd;
