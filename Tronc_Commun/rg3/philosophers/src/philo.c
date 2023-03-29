@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/09 20:40:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/29 20:19:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 		if (env->nb_philo == 1)
 			return (one_philo(env));
 		if (!philo_life(env))
-			return (1);
+			return (-1);
 		free_env(env);
 		return (1);
 	}
