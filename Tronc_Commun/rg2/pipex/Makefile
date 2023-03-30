@@ -1,51 +1,66 @@
-.PHONY: all clean fclean re libft sanitize
+.PHONY:     			all $(NAME) clear mkbuild lib minilibx clear clean fclean re sanitize
 
-NAME 		= 			pipex
+NAME					= pipex
 
-HEADER_DIR 	= 			header/
+BUILD_DIR				= build/
+	
+HEADER_DIR				= header/
+HEADER_FILE				= pipex.h
 
-SRCS_DIR	= 			src/
-GNL_DIR		=			${SRCS_DIR}get_next_line/
-BUILD_DIR	= 			${SRCS_DIR}build/
+DIR						= src/
+SRC			 			= main.c \
+						  utils.c \
+						  heredoc.c \
+						  execution.c \
+						  quit_utils.c \
+						  dup_manager.c \
+						  get_exec_done.c \
+						  get_exec_done_utils.c \
+						  get_path.c \
+							
+OBJECTS			    	= $(SRC:%.c=$(BUILD_DIR)%.o)
+	
+LIBFT					= libft.a
+LIB_DIR					= libft/
 
-SRCS 		= 			pipex.c pipex_utils.c pipex_exec.c
+	
+GCC						= gcc
+CFLAGS					= -Wall -Wextra -Werror -g3
+SANITIZE				= $(CFLAGS) -fsanitize=address
 
-SRCS_GNL	= 			get_next_line.c get_next_line_utils.c
-				 
-HEADER		=			${HEADER_DIR}pipex.h ${HEADER_DIR}get_next_line.h
-
-OBJS 		= 			${SRCS:%.c=$(BUILD_DIR)%.o}
-OBJS_GNL	=			${SRCS_GNL:%.c=$(BUILD_DIR)%.o}
-
-CC 			= 			gcc
-FLAGS 		= 			-Wall -Wextra -Werror -g
-
-RM 			= 			rm -f
-
-all:    				libft ${NAME} 
-
-$(BUILD_DIR)%.o: 		${SRCS_DIR}%.c ${HEADER}
-						@mkdir -p src/build
-						${CC} ${FLAGS} -I${HEADER_DIR} -c $< -o $@
-
-$(BUILD_DIR)%.o:		${GNL_DIR}%.c ${HEADER}
-						${CC} ${FLAGS} -I${HEADER_DIR} -c $< -o $@
-
-${NAME}:    			$(OBJS) $(OBJS_GNL) ${HEADER}
-						${CC} ${FLAGS} -I${HEADER_DIR} $(OBJS) $(OBJS_GNL) libft/libft.a -o ${NAME}
+RM 						= rm -rf
+CLEAR					= clear
 
 
-sanitize:				libft $(OBJS) $(OBJS_GNL) ${HEADER}
-						${CC} ${FLAGS} -fsanitize=address -I${HEADER_DIR} $(OBJS) $(OBJS_GNL) libft/libft.a -o ${NAME}
+$(BUILD_DIR)%.o:		$(DIR)%.c $(HEADER_DIR)/$(HEADER_FILE)
+						@mkdir -p $(@D)
+						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -c $< -o $@
 
-clean:
-						${RM} libft/libft.a libft/build/*.o \
-						$(BUILD_DIR)/*.o
+all: 					clear mkbuild lib $(HEADER_DIR) $(NAME) 
+						
+mkbuild:
+						@mkdir -p build
 
-fclean:     			clean
-						${RM} ${NAME}
+clear:
+						$(CLEAR)
+						
+$(NAME): 				$(OBJECTS) $(LIB_DIR)$(LIBFT)
+						$(GCC) $(CFLAGS) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT)
 
-re:        				fclean all
+sanitize :				$(OBJECTS) $(LIB_DIR)$(LIBFT)
+						$(GCC) $(SANITIZE) $(OBJECTS) -o $(NAME) $(LIB_DIR)$(LIBFT) $(MAC) $(LINUX)
 
-libft:
-						make -C libft
+lib:
+						@make -C $(LIB_DIR)
+					
+clean:					
+						@${RM} $(OBJECTS)
+						@make clean -C $(LIB_DIR)
+						@${RM} $(BUILD_DIR)
+
+fclean:					clean
+						@${RM} ${NAME}
+						@make fclean -C $(LIB_DIR)
+
+re:						fclean all
+						$(MAKE) all
