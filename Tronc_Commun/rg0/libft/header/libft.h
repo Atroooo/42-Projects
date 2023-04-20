@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:14:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/02/08 14:06:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:36:59 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <stdarg.h>
+# include <limits.h>
 
 typedef struct s_stack{
 	int				value;
