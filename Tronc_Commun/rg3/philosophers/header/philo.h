@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/13 22:02:17 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/17 09:51:14 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ int			check_dead(t_env *env);
 long long	timestamp(t_env *env);
 void		print_msg(char *str, t_philo *philo);
 void		ft_usleep(long long time, t_philo *philo);
-
 
 #endif
