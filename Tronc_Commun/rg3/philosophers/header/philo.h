@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/17 09:51:14 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:14:38 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_philo
 	long long		last_eat;
 	pthread_mutex_t	stop;
 	pthread_mutex_t	fork;
-	pthread_mutex_t	death;
 	struct s_philo	*next_philo;
 	struct s_env	*data;
 }	t_philo;

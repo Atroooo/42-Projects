@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:07:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/03/09 20:47:23 by marvin           ###   ########.fr       */
+/*   Updated: 2023/05/29 17:14:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static int	init_var(t_philo *philo, int index)
 	if (pthread_mutex_init(&philo->stop, NULL) != 0)
 		return (0);
 	if (pthread_mutex_init(&philo->fork, NULL) != 0)
-		return (0);
-	if (pthread_mutex_init(&philo->death, NULL) != 0)
 		return (0);
 	return (1);
 }

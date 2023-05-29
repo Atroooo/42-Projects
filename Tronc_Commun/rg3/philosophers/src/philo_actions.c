@@ -27,12 +27,21 @@ void	philo_eat_sleep_think(t_philo *philo)
 	usleep(100);
 }
 
-static int	end_meal(t_philo *philo)
+static int	end_meal(t_philo *philo, t_env *env)
 {
+	pthread_mutex_lock(&env->print);
 	philo->data->stop_cond = 1;
-	if (philo->death.__data.__lock == 1)
-		pthread_mutex_unlock(&philo->death);
+	pthread_mutex_unlock(&env->print);
+	if (philo->stop.__data.__lock == 1)
+		pthread_mutex_unlock(&philo->stop);
 	return (1);
+}
+
+static void	change_stop_cond(t_env *env)
+{
+	pthread_mutex_lock(&env->print);
+	env->stop_cond = 1;
+	pthread_mutex_unlock(&env->print);
 }
 
 int	check_dead(t_env *env)
@@ -42,12 +51,12 @@ int	check_dead(t_env *env)
 	i = -1;
 	while (++i < env->nb_philo)
 	{
-		pthread_mutex_lock(&env->philo[i].death);
+		pthread_mutex_lock(&env->philo[i].stop);
 		if ((timestamp(env) - env->philo[i].last_eat) > env->time_to_die)
 		{
-			env->stop_cond = 1;
+			change_stop_cond(env);
 			printf("%lld %d is dead\n", timestamp(env), (env->philo + i)->pos);
-			pthread_mutex_unlock(&env->philo[i].death);
+			pthread_mutex_unlock(&env->philo[i].stop);
 			return (1);
 		}
 		if (env->nb_eat > 0 && env->philo[i].m_eat == env->nb_eat)
@@ -55,10 +64,10 @@ int	check_dead(t_env *env)
 			env->philo[i].m_eat++;
 			env->count++;
 			if (env->count == env->nb_philo)
-				return (end_meal(&env->philo[i]));
+				return (end_meal(&env->philo[i], env));
 		}
-		if (env->philo[i].death.__data.__lock == 1)
-			pthread_mutex_unlock(&env->philo[i].death);
+		if (env->philo[i].stop.__data.__lock == 1)
+			pthread_mutex_unlock(&env->philo[i].stop);
 	}
 	return (0);
 }
