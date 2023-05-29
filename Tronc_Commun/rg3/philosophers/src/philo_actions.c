@@ -24,8 +24,7 @@ void	philo_eat_sleep_think(t_philo *philo)
 	print_msg(" is sleeping\n", philo);
 	ft_usleep(philo->data->time_to_sleep, philo);
 	print_msg(" is thinking\n", philo);
-	if (philo->data->nb_philo % 2 == 1 && philo->pos % 2 == 0)
-		usleep(100);
+	usleep(100);
 }
 
 static int	end_meal(t_philo *philo)

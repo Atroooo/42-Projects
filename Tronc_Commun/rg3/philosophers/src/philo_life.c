@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/29 14:33:21 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:42:49 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void	*routine(void *phil)
 	while (stop_cond(philo))
 	{
 		if (philo->data->nb_philo == 3 && philo->pos == 3)
-			usleep((philo->data->time_to_eat * 0.9) * 600);
+			usleep((philo->data->time_to_eat * 0.9) * 700);
 		if (philo->data->nb_philo == 3 && philo->pos == 2)
-			usleep((philo->data->time_to_eat * 0.9) * 500);
+			usleep((philo->data->time_to_eat * 0.9) * 600);
 		take_fork(philo);
 		philo_eat_sleep_think(philo);
 	}
@@ -55,7 +55,7 @@ static int	create_thread(t_env *env)
 		if (pthread_create(&env->philo[index].th, NULL, \
 			&routine, &env->philo[index]) != 0)
 			return (0);
-		usleep(200);
+		usleep(100);
 		index++;
 	}
 	return (1);
