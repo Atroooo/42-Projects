@@ -6,11 +6,11 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:01:41 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/25 12:46:10 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:40:35 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/philo.h"
+#include "philo.h"
 
 static void	lock_mutex(t_philo *philo, t_philo *next_philo, int s)
 {

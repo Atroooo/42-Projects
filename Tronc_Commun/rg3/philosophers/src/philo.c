@@ -6,11 +6,11 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/31 15:26:27 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:40:29 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/philo.h"
+#include "philo.h"
 
 long long	tmstmp_env(t_env *env)
 {

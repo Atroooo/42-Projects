@@ -6,11 +6,11 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:03:53 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/29 15:42:49 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:40:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/philo.h"
+#include "philo.h"
 
 static int	stop_cond(t_philo *philo)
 {
@@ -35,9 +35,9 @@ static void	*routine(void *phil)
 		philo->next_philo = philo + 1;
 	while (stop_cond(philo))
 	{
-		if (philo->data->nb_philo == 3 && philo->pos == 3)
+		if (philo->data->nb_philo % 2 == 1 && philo->pos % 2 == 1)
 			usleep((philo->data->time_to_eat * 0.9) * 700);
-		if (philo->data->nb_philo == 3 && philo->pos == 2)
+		if (philo->data->nb_philo % 2 == 1 && philo->pos % 2 == 0)
 			usleep((philo->data->time_to_eat * 0.9) * 600);
 		take_fork(philo);
 		philo_eat_sleep_think(philo);
