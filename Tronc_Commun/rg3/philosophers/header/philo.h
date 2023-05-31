@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 12:53:33 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/29 17:14:38 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:26:14 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct s_philo
 {
 	pthread_t		th;
+	struct timeval	tv;
 	long long		start;
 	int				pos;
 	int				m_eat;
@@ -63,7 +64,8 @@ void		philo_eat_sleep_think(t_philo *philo);
 int			check_dead(t_env *env);
 
 /* Utils functions */
-long long	timestamp(t_env *env);
+long long	tmstmp_env(t_env *env);
+long long	timestamp_philo(t_philo *philo);
 void		print_msg(char *str, t_philo *philo);
 void		ft_usleep(long long time, t_philo *philo);
 

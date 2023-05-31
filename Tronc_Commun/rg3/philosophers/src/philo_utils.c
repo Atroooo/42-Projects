@@ -12,13 +12,13 @@
 
 #include "../header/philo.h"
 
-long long	timestamp(t_env *env)
+long long	timestamp_philo(t_philo *philo)
 {
 	long long	time;
 
-	gettimeofday(&env->tv, NULL);
-	time = 1000000 * env->tv.tv_sec + env->tv.tv_usec;
-	time = (time - env->time_start) * 0.001;
+	gettimeofday(&philo->tv, NULL);
+	time = 1000000 * philo->tv.tv_sec + philo->tv.tv_usec;
+	time = (time - philo->start) * 0.001;
 	return (time);
 }
 
@@ -26,7 +26,7 @@ void	print_msg(char *str, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->print);
 	if (philo->data->stop_cond == 0)
-		printf("%lld %d%s", timestamp(philo->data), philo->pos, str);
+		printf("%lld %d%s", timestamp_philo(philo), philo->pos, str);
 	pthread_mutex_unlock(&philo->data->print);
 }
 
@@ -34,8 +34,8 @@ void	ft_usleep(long long time, t_philo *philo)
 {
 	long long	start;
 
-	start = timestamp(philo->data);
-	while (timestamp(philo->data) - start < time)
+	start = timestamp_philo(philo);
+	while (timestamp_philo(philo) - start < time)
 		usleep(100);
 }
 

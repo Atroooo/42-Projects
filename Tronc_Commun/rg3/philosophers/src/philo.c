@@ -6,11 +6,21 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 13:02:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/05/29 17:14:54 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/05/31 15:26:27 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+
+long long	tmstmp_env(t_env *env)
+{
+	long long	time;
+
+	gettimeofday(&env->tv, NULL);
+	time = 1000000 * env->tv.tv_sec + env->tv.tv_usec;
+	time = (time - env->time_start) * 0.001;
+	return (time);
+}
 
 void	free_env(t_env *env)
 {
@@ -34,9 +44,9 @@ int	one_philo(t_env *env)
 {
 	long long	start;
 
-	start = timestamp(env);
+	start = tmstmp_env(env);
 	usleep(env->time_to_die * 1000);
-	printf("%lld 1 is dead.\n", timestamp(env) - start);
+	printf("%lld 1 is dead.\n", tmstmp_env(env) - start);
 	free(env);
 	return (1);
 }

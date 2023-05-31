@@ -16,7 +16,7 @@ void	philo_eat_sleep_think(t_philo *philo)
 {
 	print_msg(" is eating\n", philo);
 	pthread_mutex_lock(&philo->stop);
-	philo->last_eat = timestamp(philo->data);
+	philo->last_eat = timestamp_philo(philo);
 	philo->m_eat++;
 	pthread_mutex_unlock(&philo->stop);
 	ft_usleep(philo->data->time_to_eat, philo);
@@ -52,10 +52,10 @@ int	check_dead(t_env *env)
 	while (++i < env->nb_philo)
 	{
 		pthread_mutex_lock(&env->philo[i].stop);
-		if ((timestamp(env) - env->philo[i].last_eat) > env->time_to_die)
+		if ((tmstmp_env(env) - env->philo[i].last_eat) > env->time_to_die)
 		{
 			change_stop_cond(env);
-			printf("%lld %d is dead\n", timestamp(env), (env->philo + i)->pos);
+			printf("%lld %d is dead\n", tmstmp_env(env), (env->philo + i)->pos);
 			pthread_mutex_unlock(&env->philo[i].stop);
 			return (1);
 		}
