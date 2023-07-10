@@ -11,11 +11,21 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <string>
+
+std::string	toUpper(std::string str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		str[i] = std::toupper(str[i]);
+	return (str);
+}
 
 int	main(int argc, char **argv)
 {
 	int	i;
-	int	j;
 
 	if (argc < 2)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
@@ -24,12 +34,12 @@ int	main(int argc, char **argv)
 		i = 0;
 		while (argv[++i])
 		{
-			j = -1;
-			while (argv[i][++j])
-				std::cout << (char)std::toupper(argv[i][j]);
+			std::string str = argv[i];
+			std::cout << toUpper(str);
 			if (argv[i + 1])
 				std::cout << " ";
 		}
 	}
+	std::cout << std::endl;
 	return (0);
 }
