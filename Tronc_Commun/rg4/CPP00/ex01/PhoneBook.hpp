@@ -10,3 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
+
+# include "Contact.hpp"
+
+class PhoneBook {
+
+	public:
+		PhoneBook(void);
+		~PhoneBook(void);
+
+		void	addContact(Contact contact);
+		void	printContact(int index);
+		void	printAllContacts(void);
+	
+	private:
+		Contact		_book[8];
+		int			_nbContacts;
+		int			_index;
+};
+
+#endif
