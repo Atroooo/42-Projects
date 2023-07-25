@@ -13,7 +13,7 @@
 #ifndef MAIN_HPP
 # define MAIN_HPP
 
-# include "contact.hpp"
-# include "phonebook.hpp"
+# include "Contact.hpp"
+# include "PhoneBook.hpp"
 
 #endif

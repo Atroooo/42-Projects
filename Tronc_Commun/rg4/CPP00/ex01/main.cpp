@@ -12,8 +12,12 @@
 
 #include "main.hpp"
 
-int	main(int argc, char **argv)
-{
+int	main(int argc, char **argv) {
+	PhoneBook		phoneBook;
+	std::string		command;
+	int				index;
+
+	(void) argv;
 	if (argc != 1)
 	{
 		std::cout << "Usage ./phonebook" << std::endl;
@@ -21,6 +25,25 @@ int	main(int argc, char **argv)
 	}
 	while (1)
 	{
-		
+		std::cout << "Enter a command (ADD, SEARCH or EXIT): ";
+		std::cin >> command;
+		if (std::cin.eof() || command == "EXIT")
+		{
+			std::cout << "Exiting..." << std::endl;
+			return (0);
+		}
+		else if (command == "SEARCH")
+		{
+			if (phoneBook.printAllContacts() == 1)
+			{
+				std::cout << "Enter an index: ";
+				std::cin >> index;
+				phoneBook.printContact(index);
+			}
+		}
+		else if (command == "ADD")
+			phoneBook.addContact();
+		else
+			std::cout << "Invalid command." << std::endl;
 	}
 }

@@ -14,6 +14,8 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
+# include <iomanip>
+# include <cstring>
 
 class PhoneBook {
 
@@ -21,9 +23,10 @@ class PhoneBook {
 		PhoneBook(void);
 		~PhoneBook(void);
 
-		void	addContact(Contact contact);
+		void	addContact(void);
 		void	printContact(int index);
-		void	printAllContacts(void);
+		int	printAllContacts(void);
+		void	print_contact_info(std::string str);
 	
 	private:
 		Contact		_book[8];
