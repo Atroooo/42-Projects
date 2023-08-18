@@ -43,6 +43,7 @@ void	PhoneBook::addContact(void) {
 	std::cin >> phoneNumber;
 	std::cout << "Enter Darkest Secret: ";
 	std::cin >> darkestSecret;
+	std::cout << std::endl;
 	contact.setContactinfo(firstName, lastName, nickname, phoneNumber, darkestSecret, this->_index);
 	this->_book[this->_index] = contact;
 	this->_index++;
@@ -85,7 +86,7 @@ int	PhoneBook::printAllContacts(void)
 		std::cout << "No contacts to display." << std::endl << std::endl;
 		return (0);
 	}
-	while (++i <= this->_nbContacts)
+	while (++i < this->_nbContacts)
 	{
 		std::cout << "|" << this->_book[i].id << "         |";
 		print_contact_info(this->_book[i].firstName);
