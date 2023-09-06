@@ -25,7 +25,7 @@ class PhoneBook {
 
 		void	addContact(void);
 		void	printContact(int index);
-		int	printAllContacts(void);
+		int		printAllContacts(void);
 		void	print_contact_info(std::string str);
 	
 	private:
