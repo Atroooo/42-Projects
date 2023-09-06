@@ -34,4 +34,4 @@ fclean:
 					$(RM) $(NAME)
 					$(RM) $(BUILD_DIR)
 
-re:         		fclean allm s
+re:         		fclean all

@@ -1,6 +1,6 @@
 .PHONY:        fclean, all, clear, re
 
-NAME            =	zombie
+NAME            =	violence
 
 CMP             =   c++
 FLAG            =   -Wall -Wextra -Werror -std=c++98
