@@ -53,6 +53,7 @@ void	PhoneBook::addContact(void) {
 
 void	PhoneBook::printContact(int	index)
 {
+	index -= 1;
 	if (index > this->_nbContacts || index < 0)
 	{
 		std::cout << "This contact does not exist." << std::endl;
@@ -88,7 +89,7 @@ int	PhoneBook::printAllContacts(void)
 	}
 	while (++i < this->_nbContacts)
 	{
-		std::cout << "|" << this->_book[i].id << "         |";
+		std::cout << "|" << this->_book[i].id + 1 << "         |";
 		print_contact_info(this->_book[i].firstName);
 		std::cout << "|";
 		print_contact_info(this->_book[i].lastName);

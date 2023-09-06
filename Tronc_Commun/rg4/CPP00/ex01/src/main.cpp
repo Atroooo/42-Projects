@@ -18,7 +18,7 @@ int	checkIndex(std::string index) {
 	i = 0;
 	if (index.length() > 1)
 		return (0);
-	if (index[0] > '7' || index[0] < '0')
+	if (index[0] > '8' || index[0] < '0')
 		return (0);
 	return (1);
 }
