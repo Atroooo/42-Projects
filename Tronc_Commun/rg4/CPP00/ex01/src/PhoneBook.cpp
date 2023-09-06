@@ -68,7 +68,7 @@ void	PhoneBook::printContact(int	index)
 void	PhoneBook::print_contact_info(std::string str)
 {
 	if (str.size() > 10)
-		std::cout << std::right << std::setw(10) << str.substr(0, 10) << ".";
+		std::cout << std::right << std::setw(9) << str.substr(0, 9) << ".";
 	else
 		std::cout << std::right << std::setw(10) << str;
 }
