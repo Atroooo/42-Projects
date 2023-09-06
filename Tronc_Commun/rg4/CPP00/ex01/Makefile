@@ -1,27 +1,37 @@
-.PHONY: all fclean clean re
+.PHONY:        fclean, all, clear, re
 
-NAME	=	phoneBook
+NAME            =	phonebook
 
-SRCS	=	Contact.cpp PhoneBook.cpp main.cpp 
-HEADERS	=	Contact.hpp PhoneBook.hpp main.hpp
+CMP             =   c++
+FLAG            =   -Wall -Wextra -Werror -std=c++98
+RM              =   rm -rf
+BUILD_DIR       =   build/
 
-CC		=	clang++
-CFLAGS	=	-Wall -Wextra -Werror -std=c++98
+HEADER_DIR      =   header
+HEADER_FILE     =	Contact PhoneBook main
+INC             =   $(addsuffix .hpp, $(addprefix $(HEADER_DIR)/, $(HEADER_FILE)))
 
-OBJS	=	$(SRCS:.cpp=.o)
+SRC_DIR         =   src
+SRC_FILE        =   main Contact PhoneBook
+SRC             =   $(addsuffix .cpp, $(addprefix $(SRC_DIR)/, $(SRC_FILE)))
 
-%.o:		%.cpp
-			$(CC) $(CFLAGS) -c $< -o $@
+OBJS            =   $(SRC:%.cpp=$(BUILD_DIR)%.o)
 
-all:		$(NAME)
+$(BUILD_DIR)%.o:	%.cpp $(INC)
+					@mkdir -p $(@D)
+					@$(CMP) $(FLAG) -I$(HEADER_DIR) -c $< -o $@
 
-$(NAME):	$(OBJS) $(HEADERS)
-			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+all:        		clear $(NAME)
 
-clean:
-	rm -f $(OBJS)
+$(NAME):    		$(INC) $(OBJS)
+					@$(CMP) $(FLAG) $(OBJS) -I$(HEADER_DIR) -o $(NAME)
+					@echo "\033[32m-- $(NAME) compile and create --\033[0m"
 
-fclean: clean
-	rm -f $(NAME)
+clear:
+					clear
 
-re : fclean all
+fclean:
+					$(RM) $(NAME)
+					$(RM) $(BUILD_DIR)
+
+re:         		fclean all
