@@ -12,10 +12,21 @@
 
 #include "main.hpp"
 
+int	checkIndex(std::string index) {
+	int	i;
+
+	i = 0;
+	if (index.length() > 1)
+		return (0);
+	if (index[0] > '7' || index[0] < '0')
+		return (0);
+	return (1);
+}
+
 int	main(int argc, char **argv) {
 	PhoneBook		phoneBook;
 	std::string		command;
-	int				index;
+	std::string		searchIndex;
 
 	(void) argv;
 	if (argc != 1)
@@ -37,8 +48,11 @@ int	main(int argc, char **argv) {
 			if (phoneBook.printAllContacts() == 1)
 			{
 				std::cout << "Enter an index: ";
-				std::cin >> index;
-				phoneBook.printContact(index);
+				std::cin >> searchIndex;
+				if (checkIndex(searchIndex))
+					phoneBook.printContact(searchIndex[0] - '0');
+				else
+					std::cout << "Invalid index." << std::endl;
 			}
 		}
 		else if (command == "ADD")
