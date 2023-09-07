@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:53:57 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/06 18:57:10 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:25:09 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 class Weapon {
     public:
+        Weapon(void);
         Weapon(std::string type);
         ~Weapon(void);
         std::string const &getType(void);
