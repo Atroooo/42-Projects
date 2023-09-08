@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:58:36 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/08 15:37:38 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:13:52 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,26 @@ Fixed::Fixed(Fixed const &src) {
     *this = src;
 }
 
+Fixed::Fixed(int const x)
+{
+    std::cout << "Int constructor called" << std::endl;
+    this->_value = x;
+}
+
+Fixed::Fixed(float const x)
+{
+    std::cout << "Float constructor called" << std::endl;
+    this->_value = x * (1 << this->_bits);
+}
+
 Fixed::~Fixed(void) {
     std::cout << "Destructor called" << std::endl;
+}
+
+Fixed &Fixed::operator=(Fixed const &op) {
+    std::cout << "Copy assigment operator called" << std::endl;
+    this->_value = op.getRawBits();
+    return (*this);
 }
 
 int Fixed::getRawBits(void) const {
@@ -35,8 +53,15 @@ void Fixed::setRawBits(int const raw) {
     this->_value = raw;
 }
 
-Fixed &Fixed::operator=(Fixed const &op) {
-    std::cout << "Copy assigment operator called" << std::endl;
-    this->_value = op.getRawBits();
-    return (*this);
+float Fixed::toFloat(void) const {
+    return (this->_value / (1 << this->_bits));
+}
+
+int Fixed::toInt(void) const {
+    return ((int)(this->_value / (1 << this->_bits)));
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &src) {
+    out << src.toFloat();
+    return (out);
 }
