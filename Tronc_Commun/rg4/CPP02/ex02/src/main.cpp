@@ -5,26 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 17:28:23 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/08 18:14:31 by lcompieg         ###   ########.fr       */
+/*   Created: 2023/09/07 17:58:38 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/09/08 16:42:02 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "Fixed.hpp"
 
-int main(void)
-{
-    std::string str = "HI THIS IS BRAIN";
-    std::string *stringPTR = &str;
-    std::string &stringREF = str;
-
-    std::cout << "L'adresse mémoire de la chaîne est : " << std::endl;
-    std::cout << &str << std::endl;
-    std::cout << stringPTR << std::endl;
-    std::cout << &stringREF << std::endl;
-
-    std::cout << "Le contenu de la chaîne est : " << std::endl;
-    std::cout << str << std::endl;
-    std::cout << *stringPTR << std::endl;
-    std::cout << stringREF << std::endl;
+int main( void ) {
+    Fixed a;
+    Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+    std::cout << a << std::endl;
+    std::cout << ++a << std::endl;
+    std::cout << a << std::endl;
+    std::cout << a++ << std::endl;
+    std::cout << a << std::endl;
+    std::cout << b << std::endl;
+    std::cout << Fixed::max( a, b ) << std::endl;
+    return 0;
 }
