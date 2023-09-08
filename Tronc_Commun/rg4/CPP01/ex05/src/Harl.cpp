@@ -6,29 +6,33 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:29:22 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/07 17:52:38 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:44:45 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
 void Harl::complain(std::string level) {
-    switch (level) {
-        case "debug":
-            this->debug();
-            break;
-        case "info":
-            this->info();
-            break;
-        case "warning":
-            this->warning();
-            break;
-        case "error":
-            this->error();
-            break;
-        default:
-            std::cout << "Wrong level" << std::endl;
-            break;
+    std::string     levels[4] =
+    {
+        "DEBUG",
+        "INFO",
+        "WARNING",
+        "ERROR",
+    };
+    void            (Harl::*function[4])(void) = 
+    {  
+        &Harl::debug,
+        &Harl::info,
+        &Harl::warning,
+        &Harl::error,
+    };
+    int i = 0;
+    while (level[i])
+    {
+        if (level == levels[i])
+            (this->*function[i])();
+        i++;
     }
 }
 
@@ -47,3 +51,5 @@ void Harl::warning(void) {
 void Harl::error(void) {
     std::cout << "This is unacceptable, I want to speak to the manager now." << std::endl;
 }
+
+

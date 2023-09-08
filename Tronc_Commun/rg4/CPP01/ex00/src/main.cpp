@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:42:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/06 17:25:18 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:39:27 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int main(void)
     zombie->announce();
     randomChump("Jack");
 
-    zombie->~Zombie();
+    delete zombie;
 }

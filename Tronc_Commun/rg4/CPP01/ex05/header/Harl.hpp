@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:27:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/07 16:28:55 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:24:16 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class Harl {
         void info(void);
         void warning(void);
         void error(void);
+        std::string _level[4];
     public:
         void complain(std::string level);
 };

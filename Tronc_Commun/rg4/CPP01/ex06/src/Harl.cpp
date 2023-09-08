@@ -6,23 +6,29 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:29:22 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/07 17:43:18 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:34:33 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
 void Harl::complain(std::string level) {
-    if (level == "debug")
-        this->debug();
-    else if (level == "info")
-        this->info();
-    else if (level == "warning")
-        this->warning();
-    else if (level == "error")
-        this->error();
-    else
-        std::cout << "Wrong level" << std::endl;
+    switch (level.c_str()[0]) {
+        case 'D':
+            this->debug();
+            break;
+        case 'I':
+            this->info();
+            break;
+        case 'W':
+            this->warning();
+            break;
+        case 'E':
+            this->error();
+            break;
+        default:
+            break;
+    }
 }
 
 void Harl::debug(void) {
