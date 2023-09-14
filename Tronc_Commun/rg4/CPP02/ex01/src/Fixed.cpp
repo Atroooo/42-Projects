@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:58:36 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/08 18:30:45 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:40:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ Fixed::Fixed(Fixed const &src) {
     *this = src;
 }
 
-Fixed::Fixed(int const x)
+Fixed::Fixed(const int x)
 {
     std::cout << "Int constructor called" << std::endl;
-    this->_value = x;
+    this->_value = x * ( 1 << this->_bits);
 }
 
-Fixed::Fixed(float const x)
+Fixed::Fixed(const float x)
 {
     std::cout << "Float constructor called " << std::endl;
-    this->_value = x * (1 << this->_bits);
+    this->_value = roundf(x * (1 << this->_bits));
 }
 
 Fixed::~Fixed(void) {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:58:18 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/08 16:50:12 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:05:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,33 @@ class Fixed {
         Fixed(int const x);
         Fixed(float const x);
         ~Fixed(void);
-        Fixed &operator=(Fixed const &op);
-        Fixed &operator>(Fixed const &op);
-        Fixed &operator<(Fixed const &op);
-        Fixed &operator>=(Fixed const &op);
-        Fixed &operator<=(Fixed const &op);
-        Fixed &operator==(Fixed const &op);
-        Fixed &operator!=(Fixed const &op);
-        Fixed &operator+(Fixed const &op);
-        Fixed &operator-(Fixed const &op);
-        Fixed &operator*(Fixed const &op);
-        Fixed &operator/(Fixed const &op);
+        
+        bool operator>(Fixed const &src) const;
+        bool operator<(Fixed const &src) const;
+        bool operator>=(Fixed const &src) const;
+        bool operator<=(Fixed const &src) const;
+        bool operator==(Fixed const &src) const;
+        bool operator!=(Fixed const &src) const;
+        
+        Fixed &operator=(Fixed const &src);
+        Fixed operator+(Fixed const &src) const;
+        Fixed operator-(Fixed const &src) const;
+        Fixed operator*(Fixed const &src) const;
+        Fixed operator/(Fixed const &src) const;
+
+        Fixed &operator++();
+        Fixed &operator--();
+        Fixed operator++(int);
+        Fixed operator--(int);
+        
         int getRawBits(void) const;
         void setRawBits(int const raw);
         float toFloat(void) const;
         int toInt(void) const;
-        float min(Fixed &a, Fixed &b);
-        float max(Fixed &a, Fixed &b);
-        float min(Fixed const &a, Fixed const &b);
-        float man(Fixed const &a, Fixed const &b);
+        static Fixed &min(Fixed &a, Fixed &b);
+        static Fixed &max(Fixed &a, Fixed &b);
+        static const Fixed &min(const Fixed &a, const Fixed &b);
+        static const Fixed &max(const Fixed &a, const Fixed &b);
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &src);
