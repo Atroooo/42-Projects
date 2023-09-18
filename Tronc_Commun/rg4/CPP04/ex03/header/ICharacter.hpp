@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:00 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 17:41:04 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/18 19:15:08 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class ICharacter {
         virtual void use(int idx, ICharacter &target) = 0;
 
     protected:
-        std::string _name;
-        AMateria *_inventory[4];    
+        std::string _Name;
+        AMateria *_Inventory[4];    
 };
 
 #endif
