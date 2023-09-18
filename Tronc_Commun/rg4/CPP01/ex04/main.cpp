@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:25:15 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 15:45:57 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:10:37 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ std::string replaceLine(std::string line, char *str, char *replace)
     std::string end;
     size_t i = 0;
     
+    if ((std::string) str == (std::string) replace)
+        return (line);
     while (line[i])
     {
         i = line.find(str);
@@ -73,7 +75,6 @@ std::string replaceLine(std::string line, char *str, char *replace)
 int fillAndReplace(char **argv)
 {
     std::ifstream file(argv[1]);
-    std::ofstream newFile((std::string(argv[1]) + ".replace").c_str());
     std::string line;
     
     if (!file.is_open())
@@ -81,13 +82,19 @@ int fillAndReplace(char **argv)
         std::cout << "Error: file not found" << std::endl;
         return (0);
     }
+    std::ofstream newFile((std::string(argv[1]) + ".replace").c_str());
     if (!newFile.is_open())
     {
         std::cout << "Error while creating file" << std::endl;
         return (0);
     }
     while (std::getline(file, line))
-        newFile << replaceLine(line, argv[2], argv[3]) << std::endl;
+    {
+        newFile << replaceLine(line, argv[2], argv[3]);
+        if (file.eof())
+            break;
+        newFile << std::endl;
+    }
     file.close();
     newFile.close();
     return (1);
