@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 12:40:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 15:31:08 by lcompieg         ###   ########.fr       */
+/*   Created: 2023/09/18 13:27:28 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/09/18 16:21:53 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
+#include "Cat.hpp"
+#include "Dog.hpp"
 
-#include "ScavTrap.hpp"
+int main() {
+    Animal *Animal[4];
+    
+    for (int i = 0; i < 4; i++) {
+        if (i % 2 == 0)
+            Animal[i] = new Dog();
+        else
+            Animal[i] = new Cat();
+    }
 
-class FragTrap : public ClapTrap {
-    public:
-        FragTrap(void);
-        FragTrap(std::string name);
-        FragTrap(FragTrap const &src);
-        ~FragTrap(void);
+    for (int i = 0; i < 4; i++)
+        Animal[i]->makeSound();
 
-        FragTrap &operator=(FragTrap const &src);
-
-        void highFivesGuys(void);
-        void attack(const std::string &target);
-};
-
-
-#endif
+    for (int i = 0; i < 4; i++)
+        delete Animal[i];
+    return (0);
+}

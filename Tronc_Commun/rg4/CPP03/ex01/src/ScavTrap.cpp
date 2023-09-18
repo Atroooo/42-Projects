@@ -12,12 +12,34 @@
 
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(void) : ClapTrap() {
+    std::cout << "Default Constructor ScavTrap called" << std::endl;
+    this->_Name = "Default";
+    this->_HitPoints = 100;
+    this->_EnergyPoints = 50;
+    this->_AttackDamage = 20;
+}
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
     std::cout << "Constructor ScavTrap called" << std::endl;
     this->_Name = name;
     this->_HitPoints = 100;
     this->_EnergyPoints = 50;
     this->_AttackDamage = 20;
+}
+
+ScavTrap::ScavTrap(ScavTrap const &src) : ClapTrap(src) {
+    std::cout << "Copy Constructor ScavTrap called" << std::endl;
+    *this = src;
+}
+
+ScavTrap &ScavTrap::operator=(ScavTrap const &op) {
+    std::cout << "Assignation operator ScavTrap called" << std::endl;
+    this->_Name = op._Name;
+    this->_HitPoints = op._HitPoints;
+    this->_EnergyPoints = op._EnergyPoints;
+    this->_AttackDamage = op._AttackDamage;
+    return (*this);
 }
 
 ScavTrap::~ScavTrap(void) {

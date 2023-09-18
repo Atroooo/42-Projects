@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 12:40:32 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 15:31:08 by lcompieg         ###   ########.fr       */
+/*   Created: 2023/09/18 13:28:16 by lcompieg          #+#    #+#             */
+/*   Updated: 2023/09/18 16:00:39 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
-#include "ScavTrap.hpp"
+# include "Animal.hpp"
+# include "Brain.hpp"
 
-class FragTrap : public ClapTrap {
+class Cat : public Animal {
     public:
-        FragTrap(void);
-        FragTrap(std::string name);
-        FragTrap(FragTrap const &src);
-        ~FragTrap(void);
+        Cat(void);
+        Cat(const Cat &src);
+        ~Cat(void);
 
-        FragTrap &operator=(FragTrap const &src);
+        Cat &operator=(const Cat &src);
 
-        void highFivesGuys(void);
-        void attack(const std::string &target);
+        void makeSound(void) const;
+
+    private:
+        Brain *brain;
 };
-
 
 #endif

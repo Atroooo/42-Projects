@@ -12,12 +12,33 @@
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap(void) {
+    std::cout << "Default constructor called." << std::endl;
+    this->_HitPoints = 10;
+    this->_EnergyPoints = 10;
+    this->_AttackDamage = 0;
+}
+
 ClapTrap::ClapTrap(std::string name) {
-    std::cout << "Constructor ClapTrap called." << std::endl;
+    std::cout << "Constructor called." << std::endl;
     this->_Name = name;
     this->_HitPoints = 10;
     this->_EnergyPoints = 10;
     this->_AttackDamage = 0;
+}
+
+ClapTrap::ClapTrap(ClapTrap const &src) {
+    std::cout << "Copy constructor called." << std::endl;
+    *this = src;
+}
+
+ClapTrap &ClapTrap::operator=(ClapTrap const &op) {
+    std::cout << "Copy assigment operator called" << std::endl;
+    this->_Name = op._Name;
+    this->_HitPoints = op._HitPoints;
+    this->_EnergyPoints = op._EnergyPoints;
+    this->_AttackDamage = op._AttackDamage;
+    return (*this);
 }
 
 ClapTrap::~ClapTrap(void) {

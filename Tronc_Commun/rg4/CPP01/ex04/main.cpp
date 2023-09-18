@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:25:15 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/07 16:23:15 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:45:57 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int fillAndReplace(char **argv)
     }
     while (std::getline(file, line))
         newFile << replaceLine(line, argv[2], argv[3]) << std::endl;
+    file.close();
+    newFile.close();
     return (1);
 }
 
