@@ -13,5 +13,14 @@
 #include "ClapTrap.hpp"
 
 int main(void) {
+    ClapTrap ClapTrap("Bob");
+
+    ClapTrap.attack("John");
+    ClapTrap.takeDamage(5);
+    ClapTrap.beRepaired(5);
+
+    ClapTrap.takeDamage(5);
+    ClapTrap.takeDamage(5);
+    ClapTrap.attack("John");
     return (1);
 }

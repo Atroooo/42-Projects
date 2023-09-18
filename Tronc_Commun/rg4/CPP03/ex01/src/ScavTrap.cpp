@@ -13,7 +13,7 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-    std::cout << "Constructor ScavTrap called";
+    std::cout << "Constructor ScavTrap called" << std::endl;
     this->_Name = name;
     this->_HitPoints = 100;
     this->_EnergyPoints = 50;
@@ -21,7 +21,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 }
 
 ScavTrap::~ScavTrap(void) {
-    std::cout << "Deconstructor ScavTrap called";   
+    std::cout << "Deconstructor ScavTrap called" << std::endl;   
 }
 
 void ScavTrap::attack(const std::string &target) {
@@ -42,5 +42,5 @@ void ScavTrap::guardGate(void) {
         std::cout << "ScavTrap " << this->_Name << " is dead." << std::endl;
         return ;
     }
-    std::cout << "ScavTrap " << this->_name << " has entered Gate Keeper mode !" << std::endl;
+    std::cout << "ScavTrap " << this->_Name << " has entered Gate Keeper mode !" << std::endl;
 }

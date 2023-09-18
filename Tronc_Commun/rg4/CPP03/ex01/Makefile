@@ -8,11 +8,11 @@ RM              =   rm -rf
 BUILD_DIR       =   build/
 
 HEADER_DIR      =   header
-HEADER_FILE     =	ClapTrap
+HEADER_FILE     =	ClapTrap ScavTrap
 INC             =   $(addsuffix .hpp, $(addprefix $(HEADER_DIR)/, $(HEADER_FILE)))
 
 SRC_DIR         =   src
-SRC_FILE        =   main ClapTrap
+SRC_FILE        =   main ClapTrap ScavTrap
 SRC             =   $(addsuffix .cpp, $(addprefix $(SRC_DIR)/, $(SRC_FILE)))
 
 OBJS            =   $(SRC:%.cpp=$(BUILD_DIR)%.o)

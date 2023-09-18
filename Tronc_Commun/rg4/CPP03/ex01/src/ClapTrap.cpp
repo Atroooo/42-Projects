@@ -21,7 +21,7 @@ ClapTrap::ClapTrap(std::string name) {
 }
 
 ClapTrap::~ClapTrap(void) {
-    std::cout << "Destructor for ClapTrap ";
+    std::cout << "Destructor for ClapTrap " << std::endl;
 }
 
 void ClapTrap::attack(const std::string &target) {

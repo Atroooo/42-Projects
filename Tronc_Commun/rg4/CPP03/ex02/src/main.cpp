@@ -10,8 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main(void) {
+    ClapTrap ClapTrap("Bob");
+    ScavTrap ScavTrap("John");
+    FragTrap FragTrap("Jack");
+
+    ClapTrap.attack("John");
+    ScavTrap.takeDamage(5);
+    ScavTrap.beRepaired(5);
+
+    ScavTrap.attack("Bob");
+    ClapTrap.takeDamage(20);
+    ClapTrap.beRepaired(5);
+    ScavTrap.guardGate();
+
+    FragTrap.highFivesGuys();
+    FragTrap.attack("John");
+    ScavTrap.takeDamage(30);
+    ScavTrap.beRepaired(20);
+
     return (1);
 }
