@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:47:38 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 18:36:35 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:09:11 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 
 # include <iostream>
 # include <string>
+# include "ICharacter.hpp"
+
+class ICharacter;
 
 class AMateria {
     public:
         AMateria(void);
         AMateria(std::string const &type);
         AMateria(const AMateria &src);
-        ~AMateria(void);
+        virtual ~AMateria(void);
 
         AMateria &operator=(const AMateria &src);
 

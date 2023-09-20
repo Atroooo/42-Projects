@@ -6,12 +6,13 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 17:47:12 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/08 13:44:36 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:48:37 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
+//faire avec argv argc 
 int main(void) {
     Harl harl;
 

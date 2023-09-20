@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:50:29 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 19:25:32 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:16:00 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Cure : public AMateria {
         Cure &operator=(Cure const &src);
 
         void use(ICharacter &target);
+        AMateria *clone() const;
 };
 
 #endif

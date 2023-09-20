@@ -6,11 +6,14 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:47:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 17:34:05 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:58:24 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AMateria.hpp"
+#include "Character.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
+#include "MateriaSource.hpp"
 
 int main() {
     ICharacter* me = new Character("me");
@@ -20,15 +23,16 @@ int main() {
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
     
-
     AMateria* tmp;
     tmp = src->createMateria("ice");
     me->equip(tmp);
+
     tmp = src->createMateria("cure");
     me->equip(tmp);
     
     me->use(0, *bob);
     me->use(1, *bob);
+    
     
     delete bob;
     delete me;

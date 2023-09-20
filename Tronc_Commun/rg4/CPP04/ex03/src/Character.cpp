@@ -6,18 +6,18 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:37:49 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 19:26:05 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:08:53 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
 Character::Character(void) {
-    this->_inventory = new AMateria*[4];
+    for (int i = 0; i < 4; i++)
+        this->_Inventory[i] = NULL;
 }
 
 Character::Character(std::string name) {
-    this->_inventory = new AMateria*[4];
     this->_Name = name;
 }
 
@@ -26,13 +26,16 @@ Character::Character(Character const &src) {
 }
 
 Character::~Character(void) {
-    delete [] this->_inventory;
+    for (int i = 0; i < 4; i++) {
+        if (this->_Inventory[i])
+            delete this->_Inventory[i];
+    }
 }
 
 Character &Character::operator=(Character const &src) {
     this->_Name = src.getName();
     for (int i = 0; i < 4; i++) {
-        this->_inventory[i] = src._inventory[i];
+        this->_Inventory[i] = src._Inventory[i];
     }
     return (*this);
 }
@@ -43,8 +46,8 @@ std::string const &Character::getName(void) const {
 
 void Character::equip(AMateria *m) {
     for (int i = 0; i < 4; i++) {
-        if (this->_inventory[i] == NULL) {
-            this->_inventory[i] = m;
+        if (this->_Inventory[i] == NULL) {
+            this->_Inventory[i] = m;
             return ;
         }
     }
@@ -55,7 +58,7 @@ void Character::unequip(int idx) {
         std::cout << "Invalid index" << std::endl;
         return ;
     }
-    this->_inventory[idx] = NULL;
+    this->_Inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter &target) {
@@ -63,9 +66,9 @@ void Character::use(int idx, ICharacter &target) {
         std::cout << "Invalid index" << std::endl;
         return ;
     }
-    if (this->_inventory[idx] == NULL) {
+    if (this->_Inventory[idx] == NULL) {
         std::cout << "No materia at this index" << std::endl;
         return ;
     }
-    this->_inventory[idx].use(target);
+    this->_Inventory[idx]->use(target);
 }
