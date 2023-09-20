@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:37:49 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/20 16:08:53 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:12:47 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ std::string const &Character::getName(void) const {
 
 void Character::equip(AMateria *m) {
     for (int i = 0; i < 4; i++) {
+        if (this->_Inventory[i] && this->_Inventory[i] == m) {
+            std::cout << "Already equipped" << std::endl;
+            return ;
+        }
         if (this->_Inventory[i] == NULL) {
             this->_Inventory[i] = m;
             return ;
@@ -58,7 +62,8 @@ void Character::unequip(int idx) {
         std::cout << "Invalid index" << std::endl;
         return ;
     }
-    this->_Inventory[idx] = NULL;
+    if (this->_Inventory[idx])
+        this->_Inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter &target) {

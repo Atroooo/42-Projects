@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:47:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/20 17:58:24 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:16:42 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main() {
     AMateria* tmp;
     tmp = src->createMateria("ice");
     me->equip(tmp);
+    me->unequip(0);
 
     tmp = src->createMateria("cure");
     me->equip(tmp);
