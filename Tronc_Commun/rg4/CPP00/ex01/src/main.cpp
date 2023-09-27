@@ -13,9 +13,6 @@
 #include "main.hpp"
 
 int	checkIndex(std::string index) {
-	int	i;
-
-	i = 0;
 	if (index.length() > 1)
 		return (0);
 	if (index[0] > '8' || index[0] < '0')

@@ -54,7 +54,7 @@ void	PhoneBook::addContact(void) {
 void	PhoneBook::printContact(int	index)
 {
 	index -= 1;
-	if (index > this->_nbContacts || index < 0)
+	if (index >= this->_nbContacts || index < 0)
 	{
 		std::cout << "This contact does not exist." << std::endl;
 		return ;
