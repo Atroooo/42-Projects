@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:29:22 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/08 14:34:33 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/27 22:41:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,18 @@ void Harl::complain(std::string level) {
             this->debug();
             break;
         case 'I':
+            this->debug();
             this->info();
             break;
         case 'W':
+            this->debug();
+            this->info();
             this->warning();
             break;
         case 'E':
+            this->debug();
+            this->info();
+            this->warning();
             this->error();
             break;
         default:
