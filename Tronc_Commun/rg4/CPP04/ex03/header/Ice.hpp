@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:50:42 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/20 15:20:05 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/28 22:43:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Ice : public AMateria {
         Ice &operator=(Ice const &src);
 
         void use(ICharacter &target);
-        AMateria *clone() const;
+        Ice *clone() const;
 };
 
 #endif

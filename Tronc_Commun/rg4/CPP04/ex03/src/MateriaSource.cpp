@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   MateriaSource.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:30:37 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/20 17:56:54 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/28 23:17:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MateriaSource.hpp"
 
 MateriaSource::MateriaSource(void) {
-    std::cout << "MateriaSource constructor called" << std::endl;
+    // std::cout << "MateriaSource constructor called" << std::endl;
     this->count = 0;
     for (int i = 0; i < 4; i++)
         this->_Inventory[i] = NULL;
 }
 
 MateriaSource::MateriaSource(const MateriaSource &src) {
-    std::cout << "MateriaSource copy constructor called" << std::endl;
+    // std::cout << "MateriaSource copy constructor called" << std::endl;
     *this = src;
 }
 
 MateriaSource::~MateriaSource(void) {
-    std::cout << "MateriaSource destructor called" << std::endl;
+    // std::cout << "MateriaSource destructor called" << std::endl;
     for (int i = 0; i < 4; i++) {
         if (this->_Inventory[i])
             delete this->_Inventory[i];
@@ -33,9 +33,14 @@ MateriaSource::~MateriaSource(void) {
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &src) {
-    std::cout << "MateriaSource assignation operator called" << std::endl;
+    // std::cout << "MateriaSource assignation operator called" << std::endl;
     for (int i = 0; i < 4; i++) {
-        this->_Inventory[i] = src._Inventory[i]->clone();
+        if (this->_Inventory[i])
+            delete this->_Inventory[i];
+        if (src._Inventory[i])
+            this->_Inventory[i] = src._Inventory[i]->clone();
+        else
+            this->_Inventory[i] = NULL;
     }
     this->count = src.getCount();
     return (*this);

@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:37:49 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/20 19:12:47 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/09/29 01:17:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
 Character::Character(void) {
-    for (int i = 0; i < 4; i++)
-        this->_Inventory[i] = NULL;
+    for (int i = 0; i < 4; i++) {
+        this->_Inventory[i] = NULL;    
+    }
 }
 
 Character::Character(std::string name) {
@@ -27,7 +28,7 @@ Character::Character(Character const &src) {
 
 Character::~Character(void) {
     for (int i = 0; i < 4; i++) {
-        if (this->_Inventory[i])
+        if (this->_Inventory[i]  != NULL)
             delete this->_Inventory[i];
     }
 }
@@ -35,7 +36,12 @@ Character::~Character(void) {
 Character &Character::operator=(Character const &src) {
     this->_Name = src.getName();
     for (int i = 0; i < 4; i++) {
-        this->_Inventory[i] = src._Inventory[i];
+        if (this->_Inventory[i])
+            delete this->_Inventory[i];
+        if (src._Inventory[i])
+            this->_Inventory[i] = src._Inventory[i];
+        else
+            this->_Inventory[i] = NULL;
     }
     return (*this);
 }
@@ -45,16 +51,25 @@ std::string const &Character::getName(void) const {
 }
 
 void Character::equip(AMateria *m) {
+    if (m == NULL) {
+        std::cout << "Invalid materia" << std::endl;
+        return ;
+    }
+    for (int i = 0; i < 4; i++) {
+        if (this->_Inventory[i] == NULL) {
+            std::cout << "Equipping..." << std::endl;
+            this->_Inventory[i] = m;
+            return ;
+        }
+    }
+    std::cout << "Inventory full" << std::endl;
     for (int i = 0; i < 4; i++) {
         if (this->_Inventory[i] && this->_Inventory[i] == m) {
             std::cout << "Already equipped" << std::endl;
             return ;
         }
-        if (this->_Inventory[i] == NULL) {
-            this->_Inventory[i] = m;
-            return ;
-        }
     }
+    delete m;
 }
 
 void Character::unequip(int idx) {
@@ -63,7 +78,11 @@ void Character::unequip(int idx) {
         return ;
     }
     if (this->_Inventory[idx])
+    {
+        std::cout << "Unequipping..." << std::endl;
+        delete this->_Inventory[idx];
         this->_Inventory[idx] = NULL;
+    }
 }
 
 void Character::use(int idx, ICharacter &target) {
