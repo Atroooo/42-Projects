@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:47:36 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/28 22:47:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/29 02:31:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ AMateria::AMateria(void) {
 
 AMateria::AMateria(std::string const &type) {
     // std::cout << "AMateria constructor called" << std::endl;
-    this->type = type;
+    this->_Type = type;
 }
 
 AMateria::AMateria(const AMateria &src) {
@@ -32,14 +32,16 @@ AMateria::~AMateria(void) {
 
 AMateria &AMateria::operator=(const AMateria &src) {
     // std::cout << "AMateria assignation operator called" << std::endl;
-    this->type = src.getType();
+    if (this != &src) {
+        this->_Type = src.getType();
+    }
     return (*this);
 }
 
 std::string const &AMateria::getType(void) const {
-    return (this->type);
+    return (this->_Type);
 }
 
 void AMateria::use(ICharacter &target) {
-    std::cout << this->type << " use on " << target.getName() << std::endl;
+    std::cout << this->_Type << " use on " << target.getName() << std::endl;
 }

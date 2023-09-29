@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:47:38 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/29 01:01:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/29 02:30:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class AMateria {
         virtual void use(ICharacter &target);
     
     protected:
-        std::string type;
+        std::string _Type;
 };
 
 #endif

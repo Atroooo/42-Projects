@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:30:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/29 00:50:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/29 02:32:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ Cure::~Cure(void) {
 
 Cure &Cure::operator=(const Cure &src) {
     // std::cout << "Cure assignation operator called" << std::endl;
-    this->type = src.getType();
+    if (this != &src)
+        this->_Type = src.getType();
     return (*this);
 }
 

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:30:59 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/29 00:50:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/09/29 02:32:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ Ice::~Ice(void) {
 
 Ice &Ice::operator=(const Ice &src) {
     // std::cout << "Ice assignation operator called" << std::endl;
-    this->type = src.getType();
+    if (this != &src)
+        this->_Type = src.getType();
     return (*this);
 }
 
