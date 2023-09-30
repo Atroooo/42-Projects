@@ -24,7 +24,6 @@ int main( void ) {
 
     std::cout << bureaucrat << std::endl;
     
-    //Sign and execute all forms with try and catch
     try {
         bureaucrat.signForm(shrubbery);
         shrubbery.execute(bureaucrat);
