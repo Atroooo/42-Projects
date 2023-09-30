@@ -14,38 +14,31 @@
 
 int main( void ) {
     try {
-    
-        Bureaucrat Lucas = Bureaucrat("Lucas", 1);
-        Lucas.decrementGrade();
-        Lucas.decrementGrade();
-    }
-    
-    catch (std::exception & e) {
         
-        std::cout << e.what() << std::endl;
-    }
+        Bureaucrat bureaucrat("Lucas", 1);
+        Form form("Documents secrets", 10, 1);
+        Form form2 = form;
 
-    try {
-    
-        Bureaucrat Edouard = Bureaucrat("Edouard", 1);
-        Edouard.incrementGrade();
-        std::cout << Edouard.getGrade() << std::endl;
-        std::cout << Edouard << std::endl;
-    }
-    
-    catch (std::exception & e) {
-        
-        std::cout << e.what() << std::endl;
-    }
+        bureaucrat.signForm(form2);
 
-    try {
-    
-        Bureaucrat Pierre = Bureaucrat("Pierre", -1);
-        std::cout << Pierre << std::endl;
-    }
-    
-    catch (std::exception & e) {
-        
+        std::cout << form2 << std::endl;
+    } 
+    catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
+    
+    try {
+        
+        Bureaucrat bureaucrat("Lucas", 150);
+        Form form("Documents secrets", 10, 1);
+        Form form2 = form;
+
+        bureaucrat.signForm(form2);
+
+        std::cout << form2 << std::endl;
+    } 
+    catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+    
 }
