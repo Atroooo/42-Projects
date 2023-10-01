@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Serializer.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 22:07:31 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/17 22:07:31 by marvin           ###   ########.fr       */
+/*   Created: 2023/10/01 21:58:36 by marvin            #+#    #+#             */
+/*   Updated: 2023/10/01 21:58:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Serializer.hpp"
 
-int main (void) {
+Serializer::Serializer() {}
 
-    Data *data = new Data;
+Serializer::Serializer(Serializer const & src) {
+    *this = src;
+}
 
-    data->info = "Ceci est classifie";
-    
-    std::cout << "Information: " << data->info << std::endl;
+Serializer::~Serializer() {}
 
-    
-    uintptr_t serialized = Serializer::serialize(data);
+Serializer &Serializer::operator=(Serializer const & src) {
+    if (this != &src)
+        *this = src;
+    return *this;
+}
 
-    std::cout << "Serialized: " << serialized << std::endl;
-    
-    Data *deserialized = Serializer::deserialize(serialized);
-    
-    std::cout << "Info deserialized: " << deserialized->info << std::endl;
+uintptr_t Serializer::serialize(Data *ptr) {
+    return (reinterpret_cast<uintptr_t>(ptr));
+}
 
-    delete data;
+Data *Serializer::deserialize(uintptr_t raw) {
+    return (reinterpret_cast<Data *>(raw));
 }

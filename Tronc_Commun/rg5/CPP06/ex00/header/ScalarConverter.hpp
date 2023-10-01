@@ -28,7 +28,7 @@ class ScalarConverter {
 
         ScalarConverter &operator=(ScalarConverter const &src);
 
-        void    convert(std::string const &input);
+        void            convert(std::string const &input);
 };
 
 int isfloat(std::string str);
