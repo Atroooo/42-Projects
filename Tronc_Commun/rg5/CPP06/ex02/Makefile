@@ -1,6 +1,6 @@
 .PHONY:        fclean, all, clear, re
 
-NAME            =	bureaucrat
+NAME            =	identify
 
 CMP             =   c++
 FLAG            =   -Wall -Wextra -Werror -std=c++98
@@ -8,11 +8,11 @@ RM              =   rm -rf
 BUILD_DIR       =   build/
 
 HEADER_DIR      =   header
-HEADER_FILE     =	Bureaucrat
+HEADER_FILE     =	Base
 INC             =   $(addsuffix .hpp, $(addprefix $(HEADER_DIR)/, $(HEADER_FILE)))
 
 SRC_DIR         =   src
-SRC_FILE        =   main Bureaucrat
+SRC_FILE        =   main
 SRC             =   $(addsuffix .cpp, $(addprefix $(SRC_DIR)/, $(SRC_FILE)))
 
 OBJS            =   $(SRC:%.cpp=$(BUILD_DIR)%.o)
