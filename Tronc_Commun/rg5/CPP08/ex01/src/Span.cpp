@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 22:07:31 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/17 22:07:31 by marvin           ###   ########.fr       */
+/*   Created: 2023/10/02 20:10:02 by marvin            #+#    #+#             */
+/*   Updated: 2023/10/02 20:10:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
-
-int main(void) { 
-    Span sp = Span(5); 
-    
-    sp.addNumber(6); 
-    sp.addNumber(3); 
-    sp.addNumber(17); 
-    sp.addNumber(9); 
-    sp.addNumber(11);
-
-    std::cout << sp.shortestSpan() << std::endl; 
-    std::cout << sp.longestSpan() << std::endl; 
-    
-    return (0); 
-}
