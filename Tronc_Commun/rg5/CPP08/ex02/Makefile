@@ -1,6 +1,6 @@
 .PHONY:        fclean, all, clear, re
 
-NAME            =	
+NAME            =	mutantstack
 
 CMP             =   c++
 FLAG            =   -Wall -Wextra -Werror -std=c++98
@@ -8,7 +8,7 @@ RM              =   rm -rf
 BUILD_DIR       =   build/
 
 HEADER_DIR      =   header
-HEADER_FILE     =	
+HEADER_FILE     =	MutantStack
 INC             =   $(addsuffix .hpp, $(addprefix $(HEADER_DIR)/, $(HEADER_FILE)))
 
 SRC_DIR         =   src

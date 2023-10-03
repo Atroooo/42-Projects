@@ -20,8 +20,8 @@
 class Span {
     private:
 
-        unsigned int _n;
-        std::vector<int> _v;
+        unsigned int _size;
+        int *_arr;
         
     public:
 
@@ -33,10 +33,19 @@ class Span {
         Span &operator=(Span const &other);
 
         void addNumber(int n);
+        void addMultipleNumbers(unsigned int n);
         int shortestSpan(void);
         int longestSpan(void);
         
         class NoSpanException : public std::exception {
+            virtual const char *what() const throw();
+        };
+
+        class FullSpanException : public std::exception {
+            virtual const char *what() const throw();
+        };
+
+        class NotEnoughNumbersException : public std::exception {
             virtual const char *what() const throw();
         };
 };

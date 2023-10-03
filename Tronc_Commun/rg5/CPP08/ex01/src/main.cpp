@@ -24,5 +24,19 @@ int main(void) {
     std::cout << sp.shortestSpan() << std::endl; 
     std::cout << sp.longestSpan() << std::endl; 
     
+
+    Span sp2 = Span(10000);
+    sp2.addMultipleNumbers(10000);
+
+    std::cout << sp2.shortestSpan() << std::endl;
+    std::cout << sp2.longestSpan() << std::endl;
+    
+    try {
+        Span sp3 = Span(1);
+        sp3.addNumber(1);
+        sp3.addNumber(2);
+    } catch (std::exception &e) { 
+        std::cout << e.what() << std::endl;
+    }
     return (0); 
 }
