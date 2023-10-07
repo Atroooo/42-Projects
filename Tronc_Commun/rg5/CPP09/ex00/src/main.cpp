@@ -17,4 +17,10 @@ int main(int argc, char **argv) {
         std::cout << "Usage: ./btc [file]" << std::endl;
         return 1;
     }
+    BitcoinExchange exchange;
+    if (!exchange.parsePriceFile("data.csv"))
+        return (1);
+    if (!exchange.printRes(argv[1]))
+        return (1);
+    return (0);
 }

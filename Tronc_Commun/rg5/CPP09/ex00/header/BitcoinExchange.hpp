@@ -14,26 +14,25 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <iostream>
+# include <stdlib.h>
 # include <string>
 # include <fstream>
+# include <climits>
 # include <map>
 
 class BitcoinExchange {
     public:
-        BitcoinExchange();
-        BitcoinExchange(std::string filename);
+        BitcoinExchange(void);
         BitcoinExchange(BitcoinExchange const &src);
-        ~BitcoinExchange();
+        ~BitcoinExchange(void);
 
         BitcoinExchange &operator=(BitcoinExchange const &src);
 
-        void    parseFile();
-        void    printMap(); 
-
+        int   parsePriceFile(std::string filename);
+        int   printRes(std::string filename);
+        
     private:
-        std::map<std::string, float> _map;
-        std::ifstream               _pricesFile;
-        std::ifstream                _exchangeRateFile;
+        std::map<std::string, double>  _priceMap;
 };
 
 #endif
