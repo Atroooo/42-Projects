@@ -1,6 +1,6 @@
 .PHONY:        fclean, all, clear, re
 
-NAME            =	
+NAME            =	RPN
 
 CMP             =   c++
 FLAG            =   -Wall -Wextra -Werror -std=c++98
@@ -8,11 +8,11 @@ RM              =   rm -rf
 BUILD_DIR       =   build/
 
 HEADER_DIR      =   header
-HEADER_FILE     =	
+HEADER_FILE     =	RPN
 INC             =   $(addsuffix .hpp, $(addprefix $(HEADER_DIR)/, $(HEADER_FILE)))
 
 SRC_DIR         =   src
-SRC_FILE        =   main
+SRC_FILE        =   main RPN
 SRC             =   $(addsuffix .cpp, $(addprefix $(SRC_DIR)/, $(SRC_FILE)))
 
 OBJS            =   $(SRC:%.cpp=$(BUILD_DIR)%.o)
