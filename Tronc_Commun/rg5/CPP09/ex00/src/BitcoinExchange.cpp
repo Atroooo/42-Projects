@@ -43,7 +43,7 @@ int BitcoinExchange::parsePriceFile(std::string filename) {
     while (std::getline(pricesFile, line)) {
         std::string date = line.substr(0, line.find(','));
         std::string price = line.substr(line.find(',') + 1);
-        this->_priceMap[date] = strtod(price.c_str(), NULL);
+        this->_priceMap[date] = std::atof(price.c_str());
     }
     pricesFile.close();
     return (1);
