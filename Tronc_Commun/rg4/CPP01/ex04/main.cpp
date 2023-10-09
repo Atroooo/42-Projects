@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:25:15 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 18:10:37 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:12:27 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,6 @@ int checkParam(int argc, char **argv) {
         return (0);
     }
     return (1);
-}
-
-int checkIfReplace(std::string line, char *str)
-{
-    int i = 0;
-    int j = 0;
-
-    while (line[i])
-    {
-        if (line[i] == str[0])
-        {
-            j = 0;
-            while (str[j] && line[i + j] == str[j])
-                j++;
-            if (str[j] == '\0')
-                return (1);
-        }
-        i++;
-    }
-    return (0);
 }
 
 std::string replaceLine(std::string line, char *str, char *replace)
