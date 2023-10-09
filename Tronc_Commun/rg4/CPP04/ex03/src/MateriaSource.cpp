@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:30:37 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/10/09 12:16:04 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:17:18 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void MateriaSource::learnMateria(AMateria *m) {
             return ;
         }
     }
+    std::cout << "Inventory is full" << std::endl;
     delete m;
 }
 
