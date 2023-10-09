@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:47:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/29 03:09:19 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/09 11:29:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 #include "MateriaSource.hpp"
-
+//Cas ou on learn trop de materia a check
 int main() {
     // ICharacter* me = new Character("me");
     // ICharacter* bob = new Character("bob");

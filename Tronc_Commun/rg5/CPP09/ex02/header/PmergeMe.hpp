@@ -18,7 +18,7 @@
 # include <list>
 # include <ctime>
 # include <stdlib.h>
-
+//Check si algo bien respecte
 template <typename T>
 T getMiddle(T cont, size_t middle) {
     for (size_t i = 0; i < middle; i++)
