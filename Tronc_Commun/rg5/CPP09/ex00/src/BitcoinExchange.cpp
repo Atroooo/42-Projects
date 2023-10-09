@@ -115,4 +115,4 @@ int BitcoinExchange::printRes(std::string filename) {
     }
     exchgRateFile.close();
     return (1);
-}
+}d
