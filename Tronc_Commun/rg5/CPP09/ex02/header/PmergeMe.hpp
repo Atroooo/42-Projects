@@ -18,7 +18,7 @@
 # include <list>
 # include <ctime>
 # include <stdlib.h>
-//Check si algo bien respecte
+
 template <typename T>
 T getMiddle(T cont, size_t middle) {
     for (size_t i = 0; i < middle; i++)
@@ -56,19 +56,39 @@ void merge_sort(T &cont, T &contLeft, T &contRight) {
     }
 };
 
+template <typename T> 
+void insertion_sort(T &cont) {
+    if (cont.size() < 2)
+        return;
+    typename T::iterator it = cont.begin();
+    typename T::iterator it2 = cont.begin();
+    while (++it != cont.end()) {
+        while (it2 != it) {
+            if (*it < *it2) {
+                typename T::value_type tmp = *it;
+                *it = *it2;
+                *it2 = tmp;
+            }
+            it2++;
+        }
+        it2 = cont.begin();
+    } 
+}
+
 template <typename T>
 void merge_insertion_sort(T &cont) {
-    if (cont.size() <= 1)
-        return ;
+    if (cont.size() >= 64) {
+        size_t middle = cont.size() / 2;
 
-    size_t middle = cont.size() / 2;
-    T contLeft(cont.begin(), getMiddle(cont.begin(), middle));
-    T contRight(getMiddle(cont.begin(), middle), cont.end());
+        T contLeft(cont.begin(), getMiddle(cont.begin(), middle));
+        T contRight(getMiddle(cont.begin(), middle), cont.end());
 
-    merge_insertion_sort(contLeft);
-    merge_insertion_sort(contRight);
+        merge_insertion_sort(contLeft);
+        merge_insertion_sort(contRight);
+        merge_sort(cont, contLeft, contRight);
+    }
+    insertion_sort(cont);
 
-    merge_sort(cont, contLeft, contRight);
 };
 
 template <typename T>

@@ -66,7 +66,7 @@ bool checkDate(std::string date) {
         return (false);
     return (true);
 }
-
+// Gerer annee bisextile, fevrier , 30 ou 31 jours 
 double get_value_from_data(std::map<std::string, double>& data, std::string &str)
 {	
 	int yearInputFile = std::atof(str.substr(0).c_str());
@@ -106,7 +106,7 @@ int BitcoinExchange::printRes(std::string filename) {
             std::cout << "Error: not a positive number." << std::endl;
             continue;
         }
-        if (exchgRate > INT_MAX) {
+        if (exchgRate >= 1000) {
             std::cout << "Error: too large number" << std::endl;
             continue;
         }
