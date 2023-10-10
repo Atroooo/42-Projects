@@ -66,13 +66,29 @@ bool checkDate(std::string date) {
         return (false);
     return (true);
 }
-// Gerer annee bisextile, fevrier , 30 ou 31 jours 
+
 double get_value_from_data(std::map<std::string, double>& data, std::string &str)
 {	
 	int yearInputFile = std::atof(str.substr(0).c_str());
 	int	monthInputFile = std::atof(str.substr(5).c_str());
 	int	dayInputFile = std::atof(str.substr(8).c_str());
 
+    if (yearInputFile < 2009 || yearInputFile > 2025)
+        return (-1);
+    if (monthInputFile == 2) {
+        if ((yearInputFile % 400 == 0) || (yearInputFile % 4 == 0 && yearInputFile % 100 != 0)) {
+            if (dayInputFile > 29)
+                return (-1);
+        }
+        else {
+            if (dayInputFile > 28)
+                return (-1);
+        }
+    }
+    if (monthInputFile == 4 || monthInputFile == 6 || monthInputFile == 9 || monthInputFile == 11) {
+        if (dayInputFile > 30)
+            return (-1);
+    }
 	std::map<std::string, double>::const_iterator it;
     for (it = data.begin(); it != data.end(); ++it) {
 		int Year_Data = std::atof(it->first.substr(0).c_str());
@@ -111,8 +127,13 @@ int BitcoinExchange::printRes(std::string filename) {
             continue;
         }
         double price = get_value_from_data(this->_priceMap, date);
-        std::cout << date << " => " << exchgRate << " = " << exchgRate * price << std::endl;
+        if (price == -1) {
+            std::cout << "Error: no data for this date." << std::endl;
+            continue;
+        }
+        else
+            std::cout << date << " => " << exchgRate << " = " << exchgRate * price << std::endl;
     }
     exchgRateFile.close();
     return (1);
-}d
+}
