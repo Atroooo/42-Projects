@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:47:34 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/10/09 12:16:40 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/11 22:26:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ int main() {
     // IMateriaSource* src = new MateriaSource();
     // src->learnMateria(new Ice());
     // src->learnMateria(new Cure());
+    // src->learnMateria(new Cure());
+    // src->learnMateria(new Cure());
+    // src->learnMateria(new Cure());
+    // src->learnMateria(new Cure());
     // ICharacter* me = new Character("me");
 
     // AMateria* tmp;    
@@ -137,9 +141,6 @@ int main() {
 	// me->use(1, *Alfred); 
     // me->use(2, *Alfred);
     // me->use(3, *Alfred);
-
-    // std::cout << std::endl;
-    // std::cout << "OK" << std::endl;
 
     // delete Stockton;
     // delete Alfred;
