@@ -12,6 +12,7 @@
 
 #include "Span.hpp"
 
+//Modif array en vector
 int main(void) { 
     Span sp = Span(5); 
     
