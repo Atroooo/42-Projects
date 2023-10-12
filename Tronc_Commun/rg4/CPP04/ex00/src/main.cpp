@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:28 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 16:28:45 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:41:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int main() {
     j->makeSound();
     meta->makeSound();
     wrong->makeSound();
+    delete wrong;
     delete meta;
     delete j;
     delete i;
-    delete wrong;
     return (0);
 }

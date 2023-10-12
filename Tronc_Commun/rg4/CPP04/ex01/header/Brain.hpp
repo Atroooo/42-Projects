@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:59:45 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 15:53:49 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:39:40 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ class Brain {
         ~Brain(void);
 
         Brain &operator=(const Brain &src);
+
+        void setIdea(int i, std::string idea);
+        std::string getIdea(int i) const;
 };
 
 #endif

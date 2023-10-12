@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:28 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 16:21:53 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:47:57 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 #include "Dog.hpp"
 
 int main() {
-    Animal *Animal[4];
+    Cat Cat1;
+    Cat Cat2;
+    Cat1.getBrain()->setIdea(0, "Idea 1");
+    Cat1 = Cat2;
+
+    std::cout << Cat1.getBrain()->getIdea(0) << std::endl;
+    std::cout << Cat2.getBrain()->getIdea(0) << std::endl;
     
-    for (int i = 0; i < 4; i++) {
-        if (i % 2 == 0)
-            Animal[i] = new Dog();
-        else
-            Animal[i] = new Cat();
-    }
-
-    for (int i = 0; i < 4; i++)
-        Animal[i]->makeSound();
-
-    for (int i = 0; i < 4; i++)
-        delete Animal[i];
+    Cat1.getBrain()->setIdea(0, "Idea 2");
+    
+    std::cout << Cat1.getBrain()->getIdea(0) << std::endl;
+    std::cout << Cat2.getBrain()->getIdea(0) << std::endl;
     return (0);
 }

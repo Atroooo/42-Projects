@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:18 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 15:49:26 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:23:19 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class Dog : public Animal {
         Dog &operator=(const Dog &src);
         
         void makeSound(void) const;
+        Brain *getBrain(void) const;
     
     private:
         Brain *brain;
