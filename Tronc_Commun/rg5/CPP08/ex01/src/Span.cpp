@@ -12,49 +12,36 @@
 
 #include "Span.hpp"
 
-Span::Span() : _size(0), _arr(NULL) {}
+Span::Span() : _size(0) {}
 
-Span::Span(unsigned int n) : _size(n), _arr(new int[n]) {
-    for (unsigned int i = 0; i < _size; i++)
-        _arr[i] = 0;
+Span::Span(unsigned int n) : _size(n) {}
+
+Span::Span(Span const &other) : _size(other._size) {
+    _numbers = other._numbers;
 }
 
-Span::Span(Span const &other) : _size(other._size), _arr(new int[_size]) {
-    for (unsigned int i = 0; i < _size; i++)
-        _arr[i] = other._arr[i];
-}
-
-Span::~Span() {
-    delete [] _arr;
-}
+Span::~Span() {}
 
 Span &Span::operator=(Span const &other) {
-    delete [] _arr;
-    this->_size = other._size;
-    this->_arr = new int[_size];
-    for (unsigned int i = 0; i < _size; i++)
-        _arr[i] = other._arr[i];
-    return *this;
+    _size = other._size;
+    _numbers = other._numbers;
+    return (*this);
 }
 
 void Span::addNumber(int n) {
     if (_size == 0)
         throw std::exception();
-    for (unsigned int i = 0; i < _size; i++) {
-        if (_arr[i] == 0) {
-            _arr[i] = n;
-            return ;
-        }
-    }
-    throw Span::FullSpanException();
+    if (_numbers.size() == _size)
+        throw Span::FullSpanException();
+    _numbers.push_back(n);
 }
 
 int Span::shortestSpan(void) {
-    if (_size < 2)
+    if (_size < 2 || _numbers.size() < 2)
         throw Span::NotEnoughNumbersException();
 
     std::vector<int> v(_size);
-    std::copy(_arr, _arr + _size, v.begin());
+    std::copy(_numbers.begin(), _numbers.end(), v.begin());
     std::sort(v.begin(), v.end());
 
     for (size_t i = 0; i < _size - 1; i++) {
@@ -68,8 +55,8 @@ int Span::shortestSpan(void) {
 int Span::longestSpan(void) {
     if (_size < 2)
         throw Span::NotEnoughNumbersException();
-    int min = *std::min_element(_arr, _arr + _size);
-    int max = *std::max_element(_arr, _arr + _size);
+    int min = *std::min_element(_numbers.begin(), _numbers.end());
+    int max = *std::max_element(_numbers.begin(), _numbers.end());
     return (max - min);
 }
 

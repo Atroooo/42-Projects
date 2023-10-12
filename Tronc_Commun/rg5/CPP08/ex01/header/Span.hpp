@@ -21,7 +21,7 @@ class Span {
     private:
 
         unsigned int _size;
-        int *_arr;
+        std::vector<int> _numbers;
         
     public:
 
