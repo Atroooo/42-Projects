@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:22:52 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/09/18 16:25:42 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:45:06 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class WrongAnimal {
         WrongAnimal &operator=(const WrongAnimal &src);
 
         std::string getType(void) const;
-        virtual void makeSound(void) const;
+        void makeSound(void) const;
 };
 
 #endif

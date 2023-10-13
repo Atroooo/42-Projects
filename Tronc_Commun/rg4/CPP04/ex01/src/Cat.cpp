@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:46 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/10/12 19:37:34 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/13 15:44:21 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ Cat::~Cat(void){
 Cat &Cat::operator=(const Cat &src) {
     std::cout << "Cat assignation operator called" << std::endl;
     this->type = src.getType();
+    delete this->brain;
     this->brain = new Brain(*src.getBrain());
     return (*this);
 }

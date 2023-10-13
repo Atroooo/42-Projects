@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:28:50 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/10/12 19:46:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/13 15:44:49 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ Dog::~Dog(void) {
 Dog &Dog::operator=(const Dog &src) {
     std::cout << "Dog assignation operator called" << std::endl;
     this->type = src.getType();
+    delete this->brain;
     this->brain = new Brain(*src.getBrain());
     return (*this);
 }

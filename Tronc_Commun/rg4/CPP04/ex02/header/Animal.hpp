@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:21 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/10/12 19:48:31 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/13 15:43:13 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ class Animal {
 
         std::string getType(void) const;
         virtual void makeSound(void) const = 0;
-        virtual Brain *getBrain(void) const = 0;
 };
 #endif
