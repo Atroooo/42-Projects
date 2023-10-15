@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:25 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/10/12 19:45:41 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/15 16:29:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,4 @@ std::string Animal::getType(void) const {
 
 void Animal::makeSound(void) const {
     std::cout << "Animal sound" << std::endl;
-}
-Brain * Animal::getBrain( void ) const {
-    return (NULL);
 }
