@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:27:28 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/10/12 19:49:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/16 11:04:16 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main() {
     std::cout << Cat2.getBrain()->getIdea(0) << std::endl;
     
     Cat1.getBrain()->setIdea(0, "Idea 2");
-    
+
     std::cout << Cat1.getBrain()->getIdea(0) << std::endl;
     std::cout << Cat2.getBrain()->getIdea(0) << std::endl;
     return (0);

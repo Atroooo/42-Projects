@@ -6,7 +6,7 @@
 /*   By: lcompieg <lcompieg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:08:12 by lcompieg          #+#    #+#             */
-/*   Updated: 2023/10/12 14:43:45 by lcompieg         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:03:56 by lcompieg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ Brain &Brain::operator=(const Brain &src) {
 }
 
 void Brain::setIdea(int index, std::string idea) {
-    if (index >= 0 && index < 100)
+    if (index >= 0 && index < 100) {
         this->ideas[index] = idea;
+        return ;
+    }
     std::cout << "index out of range" << std::endl;
 }
 
