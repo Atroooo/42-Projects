@@ -90,7 +90,7 @@ void    convertToInt(std::string const &input) {
     }
     else if (isfloat(input)) {
         float f = std::atof(input.c_str());
-        if (f >= INT_MIN && f <= INT_MAX) {
+        if (f >= (float)INT_MIN && f <= (float)INT_MAX) {
             std::cout << static_cast<int>(f) << std::endl;
         }
         else {
