@@ -34,6 +34,7 @@ class Span {
 
         void addNumber(int n);
         void addMultipleNumbers(unsigned int n);
+        void addMultipleNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end);
         int shortestSpan(void);
         int longestSpan(void);
         

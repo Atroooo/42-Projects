@@ -68,6 +68,12 @@ void Span::addMultipleNumbers(unsigned int n) {
     }
 }
 
+void Span::addMultipleNumbers( std::vector<int>::iterator begin, std::vector<int>::iterator end ) {
+    if (std::distance(begin, end) > _size || _size == 0 || std::distance(begin, end) + _numbers.size() > _size)
+        throw Span::FullSpanException();
+    this->_numbers.insert(this->_numbers.end(), begin, end);
+}
+
 const char *Span::NoSpanException::what() const throw() {
     return "No span to find";
 }

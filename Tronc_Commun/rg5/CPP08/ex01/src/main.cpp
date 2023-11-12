@@ -31,6 +31,8 @@ int main(void) {
     std::cout << sp2.shortestSpan() << std::endl;
     std::cout << sp2.longestSpan() << std::endl;
     
+
+
     try {
         Span sp3 = Span(1);
         sp3.addNumber(1);
@@ -38,5 +40,18 @@ int main(void) {
     } catch (std::exception &e) { 
         std::cout << e.what() << std::endl;
     }
-    return (0); 
+
+    
+    Span sp4 = Span(10000);
+    std::vector<int> v(10000);
+    for (int i = 0; i < 10000; i++) {
+        v[i] = i;
+    }
+
+    sp4.addMultipleNumbers(v.begin(), v.end());
+
+    std::cout << sp4.shortestSpan() << std::endl;
+    std::cout << sp4.longestSpan() << std::endl;
+
+    return (0);
 }
