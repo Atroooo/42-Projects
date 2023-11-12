@@ -25,6 +25,7 @@ int main( void ) {
         bureaucrat.signForm(*form);
         form->execute(bureaucrat);
         std::cout << *form << std::endl;
+        delete form;
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
@@ -38,6 +39,7 @@ int main( void ) {
         bureaucrat.signForm(*form);
         form->execute(bureaucrat);
         std::cout << *form << std::endl;
+        delete form;
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
