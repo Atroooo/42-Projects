@@ -12,7 +12,6 @@
 
 #include "Array.hpp"
 
-
 int main(void) {
     Array<int> a(5);
     Array<int> b(5);
@@ -48,6 +47,13 @@ int main(void) {
         for (int i = 0; i < 7; i++)
             std::cout << c[i] << " ";
         std::cout << std::endl;
+    }
+    catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+
+    try {
+        std::cout << "a[-5]: " << a[-5] << std::endl;
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
