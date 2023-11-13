@@ -16,6 +16,7 @@
 int main(void) {
     Array<int> a(5);
     Array<int> b(5);
+    Array<int> c;
 
     for (int i = 0; i < 5; i++) {
         a[i] = i;
@@ -23,14 +24,29 @@ int main(void) {
     }
 
     std::cout << "a: ";
-    for (int i = 0; i < 5; i++)
-        std::cout << a[i] << " ";
-    std::cout << std::endl;
+    try {
+        for (int i = 0; i < 5; i++)
+            std::cout << a[i] << " ";
+        std::cout << std::endl;
+    }
+    catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
 
     std::cout << "b: ";
     try {
         for (int i = 0; i < 7; i++)
             std::cout << b[i] << " ";
+        std::cout << std::endl;
+    }
+    catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+
+    std::cout << "c: ";
+    try {
+        for (int i = 0; i < 7; i++)
+            std::cout << c[i] << " ";
         std::cout << std::endl;
     }
     catch (std::exception &e) {
