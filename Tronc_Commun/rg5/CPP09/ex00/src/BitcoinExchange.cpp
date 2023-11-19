@@ -94,16 +94,16 @@ double get_value_from_data(std::map<std::string, double>& data, std::string &str
 		int Year_Data = std::atof(it->first.substr(0).c_str());
 		int Month_Data = std::atof(it->first.substr(5).c_str());
 		int Day_Data = std::atof(it->first.substr(8).c_str());
-		if (Year_Data > yearInputFile && Month_Data > monthInputFile && \
-            Day_Data > dayInputFile) {
-            if (it != data.begin())
-                it--;	
-			break ;
-		}
         if (Year_Data == yearInputFile && Month_Data == monthInputFile && \
             Day_Data == dayInputFile) {	
 			break;
         }
+		if (Year_Data >= yearInputFile && Month_Data >= monthInputFile && \
+            Day_Data >= dayInputFile) {
+            if (it != data.begin())
+                it--;	
+			break ;
+		}
     }
 	return ((it)->second);
 }
