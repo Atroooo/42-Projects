@@ -17,9 +17,14 @@ int main(void) {
     Array<int> b(5);
     Array<int> c;
 
-    for (int i = 0; i < 5; i++) {
-        a[i] = i;
-        b[i] = i + 5;
+    try {
+        for (int i = 0; i < 5; i++) {
+            a[i] = i;
+            b[i] = i + 5;
+        }
+    }
+    catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
     }
 
     std::cout << "a: ";
