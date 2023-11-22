@@ -15,6 +15,6 @@ COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 RUN chmod 777 -R /var/www/html
 
-EXPOSE 4443
+EXPOSE 443
 
 CMD [ "nginx", "-g", "daemon off;" ]
