@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
 	php-gd \
 	php-intl \
 	curl \
+	postfix \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
